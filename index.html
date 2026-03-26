@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GP Fusion - Excellence Automobile & Detailing</title>
+  <meta name="description" content="Découvrez GP Motors pour l'achat, la vente et la location de véhicules d'exception, et GP Detail pour le nettoyage et le polishing professionnel." />
+  <meta property="og:title" content="GP Fusion - Excellence Automobile" />
+  <meta property="og:description" content="Vente, location et esthétique automobile de prestige." />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">GP <span>Fusion</span></a>
+      <div class="menu-toggle">☰</div>
+      <nav class="nav-links">
+        <a href="index.html" class="active">Accueil</a>
+        <a href="vente.html">Vente</a>
+        <a href="location.html">Location</a>
+        <a href="detail.html">GP Detail</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=2069');">
+    <div class="hero-content">
+      <h1>L'Excellence <br><span>Automobile</span></h1>
+      <p>Bienvenue chez GP Fusion. Découvrez nos services exclusifs avec GP Motors pour vos véhicules et GP Detail pour un esthétisme parfait.</p>
+      <div class="hero-actions">
+        <a href="vente.html" class="btn">Nos Véhicules</a>
+        <a href="detail.html" class="btn btn-outline">Services Detailing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SPLIT -->
+  <section class="grid-section">
+    <div class="container">
+      <h2 class="section-title">Nos <span>Marques</span></h2>
+      <div class="cards">
+        <!-- GP Motors -->
+        <div class="card" onclick="location.href='vente.html'">
+          <div class="card-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=2070" loading="lazy" alt="GP Motors" class="card-img" />
+             <span class="card-badge" style="background: var(--color-primary)">GP Motors</span>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Vente & Location</h3>
+            <p class="card-subtitle">Achat, Vente, Location, Dépôt Vente, Remorquage</p>
+            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Trouvez le véhicule exigeant ou confiez-nous le vôtre en toute sécurité.</p>
+          </div>
+        </div>
+        <!-- GP Detail -->
+        <div class="card" onclick="location.href='detail.html'">
+          <div class="card-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=2070" loading="lazy" alt="GP Detail" class="card-img" />
+             <span class="card-badge" style="background: #fff; color: #000;">GP Detail</span>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Nettoyage & Polishing</h3>
+            <p class="card-subtitle">Esthétique Automobile de Précision</p>
+            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Redonnez l'éclat du neuf à votre véhicule avec nos prestations premium.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h3>GP Fusion</h3>
+        <p>Votre partenaire automobile de confiance.</p>
+        <p>123 Avenue de l'Automobile, 75000 Paris</p>
+        <p>contact@gpfusion.fr | +33 1 23 45 67 89</p>
+      </div>
+      <div class="footer-col">
+        <h3>GP Motors</h3>
+        <ul class="footer-links">
+          <li><a href="vente.html">Voitures d'occasion</a></li>
+          <li><a href="location.html">Location</a></li>
+          <li><a href="vente.html">Dépôt vente</a></li>
+          <li><a href="#">Remorquage</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>GP Detail</h3>
+        <ul class="footer-links">
+          <li><a href="detail.html">Nettoyage Intérieur</a></li>
+          <li><a href="detail.html">Nettoyage Extérieur</a></li>
+          <li><a href="detail.html">Polishing</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 GP Fusion. Tous droits réservés.
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
