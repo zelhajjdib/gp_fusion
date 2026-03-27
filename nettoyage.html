@@ -4,51 +4,351 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nettoyage | GP Detail</title>
-  <meta name="description" content="Découvrez l'inventaire exclusif de GP Motors. Des véhicules d'exception, rigoureusement sélectionnés, disponibles à l'achat." />
+  <meta name="description" content="Nettoyage vapeur profond, pressing des sièges et décontamination extérieure professionnelle. GP Detail." />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <link rel="stylesheet" href="/src/style.css" />
-  <!-- Import specific catalog styles via a link tag or inside main.js -->
-  <link rel="stylesheet" href="/src/catalog.css">
+  <link rel="stylesheet" href="/src/service-page.css" />
 </head>
-<body class="theme-detail" style="background-color: #050505; color: #fff;">
+<body class="theme-detail sp-page">
+
+  <!-- HEADER -->
   <header class="header">
     <div class="container">
       <a href="index.html" class="logo">GP <span>Fusion</span></a>
       <div class="menu-toggle">☰</div>
       <nav class="nav-links">
         <a href="index.html">Accueil</a>
-        <a href="achat.html" class="active">Achat</a>
+        <a href="achat.html">Achat</a>
         <a href="vente.html">Vente</a>
         <a href="location.html">Location</a>
         <a href="diagnostic.html">Diagnostic</a>
-        <a href="nettoyage.html">Nettoyage</a>
+        <a href="nettoyage.html" class="active">Nettoyage</a>
         <a href="polissage.html">Polissage</a>
         <a href="ceramique.html">Céramique</a>
       </nav>
     </div>
   </header>
 
-  <main style="padding: 150px 0; text-align: center; min-height: 70vh;"><h1>Nettoyage - GP Detail</h1><p style="color:var(--color-primary); font-size: 1.5rem; margin-top:20px;">Page en construction avec thème bleu activé !</p></main>
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="sp-hero">
+      <div class="sp-hero__bg">
+        <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=2070" alt="Nettoyage automobile GP Detail" />
+        <div class="sp-hero__overlay"></div>
+      </div>
+      <div class="sp-hero__body sp-wrap">
+        <div class="sp-eyebrow">Nettoyage automobile · GP Detail</div>
+        <h1 class="sp-hero__title">
+          Le nettoyage<br>
+          qui fait<br>
+          <span class="sp-accent">la diff.</span>
+        </h1>
+        <p class="sp-hero__sub">
+          Nettoyage vapeur profond, pressing des sièges<br>
+          et décontamination extérieure minutieuse.
+        </p>
+        <div class="sp-hero__ctas">
+          <a href="#formules" class="sp-btn sp-btn--solid">Choisir une formule →</a>
+          <a href="#rdv" class="sp-btn sp-btn--outline">Prendre RDV</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <div class="sp-stats">
+      <div class="sp-stats__grid sp-wrap">
+        <div class="sp-stat">
+          <span class="sp-stat__val">500+</span>
+          <span class="sp-stat__lbl">Véhicules traités</span>
+        </div>
+        <div class="sp-stat">
+          <span class="sp-stat__val">4.9/5</span>
+          <span class="sp-stat__lbl">Note client</span>
+        </div>
+        <div class="sp-stat">
+          <span class="sp-stat__val">48H</span>
+          <span class="sp-stat__lbl">Délai maximum</span>
+        </div>
+        <div class="sp-stat">
+          <span class="sp-stat__val">100%</span>
+          <span class="sp-stat__lbl">Satisfaction garantie</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== AVANT / APRÈS ===== -->
+    <section class="sp-ba">
+      <div class="sp-wrap">
+        <div class="sp-section-head">
+          <div class="sp-eyebrow">Résultats</div>
+          <h2 class="sp-h2" style="margin-top:20px;">Avant / <span class="sp-accent">Après</span></h2>
+          <p class="sp-ba__hint">Glissez le curseur pour révéler la transformation.</p>
+        </div>
+      </div>
+      <div class="sp-wrap">
+        <div class="sp-ba__slider" id="baSlider">
+          <!-- Base : avant (grisé) -->
+          <div class="sp-ba__avant">
+            <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=2069" alt="Avant nettoyage" />
+          </div>
+          <!-- Dessus : après (couleur, clippé à droite) -->
+          <div class="sp-ba__apres" id="baApres">
+            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=2070" alt="Après nettoyage" />
+          </div>
+          <!-- Labels au-dessus de tout -->
+          <div class="sp-ba__lbl sp-ba__lbl--avant">Avant</div>
+          <div class="sp-ba__lbl sp-ba__lbl--apres">Après</div>
+          <!-- Handle -->
+          <div class="sp-ba__handle" id="baHandle">
+            <div class="sp-ba__btn">◁ ▷</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FORMULES ===== -->
+    <section class="sp-formules" id="formules">
+      <div class="sp-wrap">
+        <div class="sp-formules__header">
+          <div>
+            <div class="sp-eyebrow">Tarifs</div>
+            <h2 class="sp-h2" style="margin-top:20px;">
+              Choisissez<br><span class="sp-accent">votre</span> formule
+            </h2>
+          </div>
+          <div class="sp-formules__meta">
+            5 formules disponibles<br>
+            Du lavage simple au detailing complet
+          </div>
+        </div>
+
+        <div class="sp-grid">
+
+          <!-- Lavage Extérieur -->
+          <div class="sp-card">
+            <div class="sp-card__head">
+              <div class="sp-card__name">Lavage Extérieur</div>
+              <div class="sp-card__dur">1H</div>
+            </div>
+            <p class="sp-card__desc">Nettoyage complet de la carrosserie, jantes, vitres et pneus. Finition à la main pour un éclat parfait.</p>
+            <ul class="sp-card__list">
+              <li>Carrosserie complète</li>
+              <li>Jantes & pneus</li>
+              <li>Vitres extérieures</li>
+              <li>Seuils de portes</li>
+            </ul>
+            <div class="sp-card__foot">
+              <div class="sp-card__price">À partir de 29€</div>
+              <a href="#rdv" class="sp-card__cta">RÉSERVER</a>
+            </div>
+          </div>
+
+          <!-- Lavage Intérieur -->
+          <div class="sp-card">
+            <div class="sp-card__head">
+              <div class="sp-card__name">Lavage Intérieur</div>
+              <div class="sp-card__dur">1H30</div>
+            </div>
+            <p class="sp-card__desc">Aspiration profonde, nettoyage des plastiques, vitres intérieures et tapis. Habitacle impeccable.</p>
+            <ul class="sp-card__list">
+              <li>Aspiration complète</li>
+              <li>Plastiques & tableau de bord</li>
+              <li>Vitres intérieures</li>
+              <li>Tapis & coffre</li>
+            </ul>
+            <div class="sp-card__foot">
+              <div class="sp-card__price">À partir de 39€</div>
+              <a href="#rdv" class="sp-card__cta">RÉSERVER</a>
+            </div>
+          </div>
+
+          <!-- Lavage Complet (featured) -->
+          <div class="sp-card sp-card--featured">
+            <div class="sp-card__badge">POPULAIRE</div>
+            <div class="sp-card__head">
+              <div class="sp-card__name">Lavage Complet</div>
+              <div class="sp-card__dur">2H</div>
+            </div>
+            <p class="sp-card__desc">La combinaison parfaite. Intérieur et extérieur traités avec soin pour un résultat total.</p>
+            <ul class="sp-card__list">
+              <li>Lavage extérieur complet</li>
+              <li>Lavage intérieur complet</li>
+              <li>Traitement plastiques</li>
+              <li>Désodorisation</li>
+            </ul>
+            <div class="sp-card__foot">
+              <div class="sp-card__price">À partir de 59€</div>
+              <a href="#rdv" class="sp-card__cta">RÉSERVER</a>
+            </div>
+          </div>
+
+          <!-- Décontamination -->
+          <div class="sp-card">
+            <div class="sp-card__head">
+              <div class="sp-card__name">Décontamination</div>
+              <div class="sp-card__dur">2H30</div>
+            </div>
+            <p class="sp-card__desc">Élimination des contaminants ferreux, insectes, goudron et résidus industriels incrustés.</p>
+            <ul class="sp-card__list">
+              <li>Décontamination ferreux</li>
+              <li>Retrait insectes & goudron</li>
+              <li>Argile décontaminante</li>
+              <li>Rinçage haute pression</li>
+            </ul>
+            <div class="sp-card__foot">
+              <div class="sp-card__price">À partir de 89€</div>
+              <a href="#rdv" class="sp-card__cta">RÉSERVER</a>
+            </div>
+          </div>
+
+          <!-- Grand Nettoyage -->
+          <div class="sp-card">
+            <div class="sp-card__head">
+              <div class="sp-card__name">Grand Nettoyage</div>
+              <div class="sp-card__dur">Journée</div>
+            </div>
+            <p class="sp-card__desc">Prestation complète pour une remise à neuf totale. Intérieur et extérieur au niveau showroom.</p>
+            <ul class="sp-card__list">
+              <li>Nettoyage vapeur complet</li>
+              <li>Pressing sièges & moquettes</li>
+              <li>Décontamination totale</li>
+              <li>Finition cuirs & plastiques</li>
+            </ul>
+            <div class="sp-card__foot">
+              <div class="sp-card__price">À partir de 149€</div>
+              <a href="#rdv" class="sp-card__cta">RÉSERVER</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RÉSERVATION ===== -->
+    <section class="sp-rdv" id="rdv">
+      <div class="sp-wrap">
+        <div class="sp-section-head">
+          <div class="sp-eyebrow">Prise de rendez-vous</div>
+          <h2 class="sp-h2" style="margin-top:20px;">
+            Réservez<br><span class="sp-accent">votre</span> créneau
+          </h2>
+        </div>
+
+        <!-- Stepper -->
+        <div class="sp-stepper">
+          <div class="sp-step-dot is-active" id="dot1">1</div>
+          <div class="sp-step-line" id="line1"></div>
+          <div class="sp-step-dot" id="dot2">2</div>
+          <div class="sp-step-line" id="line2"></div>
+          <div class="sp-step-dot" id="dot3">3</div>
+        </div>
+        <div class="sp-stepper-lbls">
+          <div class="sp-stepper-lbl is-active" id="lbl1">Service</div>
+          <div class="sp-stepper-gap"></div>
+          <div class="sp-stepper-lbl" id="lbl2">Créneau</div>
+          <div class="sp-stepper-gap"></div>
+          <div class="sp-stepper-lbl" id="lbl3">Contact</div>
+        </div>
+
+        <!-- Étape 1 : Sélection service -->
+        <div class="sp-panel is-active" id="panel1">
+          <p class="sp-panel-q">Quelle prestation souhaitez-vous ?</p>
+          <div class="sp-tiles">
+            <div class="sp-tile" data-service="Lavage Extérieur">
+              <div class="sp-tile__dur">1H</div>
+              <div class="sp-tile__name">Lavage Extérieur</div>
+              <div class="sp-tile__price">29€+</div>
+            </div>
+            <div class="sp-tile" data-service="Lavage Intérieur">
+              <div class="sp-tile__dur">1H30</div>
+              <div class="sp-tile__name">Lavage Intérieur</div>
+              <div class="sp-tile__price">39€+</div>
+            </div>
+            <div class="sp-tile is-sel" data-service="Lavage Complet">
+              <div class="sp-tile__dur">2H</div>
+              <div class="sp-tile__name">Lavage Complet</div>
+              <div class="sp-tile__price">59€+</div>
+            </div>
+            <div class="sp-tile" data-service="Décontamination">
+              <div class="sp-tile__dur">2H30</div>
+              <div class="sp-tile__name">Décontamination</div>
+              <div class="sp-tile__price">89€+</div>
+            </div>
+            <div class="sp-tile" data-service="Grand Nettoyage">
+              <div class="sp-tile__dur">Journée</div>
+              <div class="sp-tile__name">Grand Nettoyage</div>
+              <div class="sp-tile__price">149€+</div>
+            </div>
+          </div>
+          <div class="sp-nav-btns">
+            <button class="sp-btn sp-btn--solid sp-next" data-to="2">Choisir un créneau →</button>
+          </div>
+        </div>
+
+        <!-- Étape 2 : Date & Créneau -->
+        <div class="sp-panel" id="panel2">
+          <p class="sp-panel-q">Choisissez une date et un horaire</p>
+          <input type="date" class="sp-date" id="rdvDate" />
+          <div class="sp-times">
+            <div class="sp-slot">8h00</div>
+            <div class="sp-slot">9h30</div>
+            <div class="sp-slot">11h00</div>
+            <div class="sp-slot is-sel">13h00</div>
+            <div class="sp-slot">14h30</div>
+            <div class="sp-slot">16h00</div>
+            <div class="sp-slot">17h30</div>
+          </div>
+          <div class="sp-nav-btns">
+            <button class="sp-btn sp-btn--outline sp-prev" data-to="1">← Retour</button>
+            <button class="sp-btn sp-btn--solid sp-next" data-to="3">Continuer →</button>
+          </div>
+        </div>
+
+        <!-- Étape 3 : Contact -->
+        <div class="sp-panel" id="panel3">
+          <p class="sp-panel-q">Vos coordonnées</p>
+          <div class="sp-form">
+            <input type="text" class="sp-input" placeholder="Votre nom" />
+            <input type="tel" class="sp-input" placeholder="Votre téléphone" />
+            <input type="text" class="sp-input" placeholder="Marque & modèle du véhicule" />
+            <textarea class="sp-input sp-textarea" placeholder="Informations complémentaires..."></textarea>
+          </div>
+          <div class="sp-nav-btns" style="margin-top:20px;">
+            <button class="sp-btn sp-btn--outline sp-prev" data-to="2">← Retour</button>
+            <button class="sp-btn sp-btn--solid">Confirmer la réservation →</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>
     <div class="container footer-grid">
       <div class="footer-col">
+        <h3>GP Fusion</h3>
+        <p>Votre partenaire automobile de confiance.</p>
+        <p>123 Avenue de l'Automobile, 75000 Paris</p>
+        <p>contact@gpfusion.fr | +33 1 23 45 67 89</p>
+      </div>
+      <div class="footer-col">
         <h3>GP Motors</h3>
-        <p>Expert en achat, vente, et dépôt-vente de véhicules d'exception.</p>
-        <p>Service de recherche personnalisée et remorquage disponible.</p>
+        <ul class="footer-links">
+          <li><a href="achat.html">Achat Véhicules</a></li>
+          <li><a href="location.html">Location</a></li>
+          <li><a href="vente.html">Dépôt Vente</a></li>
+          <li><a href="diagnostic.html">Diagnostic</a></li>
+        </ul>
       </div>
       <div class="footer-col">
-        <h3>Contact</h3>
-        <p>123 Avenue de l'Automobile, Paris</p>
-        <p>vente@gpmotors.fr | +33 1 23 45 67 89</p>
-      </div>
-      <div class="footer-col">
-        <h3>Liens Utiles</h3>
-        <ul class="footer-links" style="list-style:none; padding:0; margin:0;">
-          <li><a href="achat.html" style="color:var(--color-text-muted);">Inventaire</a></li>
-          <li><a href="#" style="color:var(--color-text-muted);">Recherche Personnalisée</a></li>
-          <li><a href="vente.html" style="color:var(--color-text-muted);">Dépôt Vente</a></li>
+        <h3>GP Detail</h3>
+        <ul class="footer-links">
+          <li><a href="nettoyage.html">Nettoyage complet</a></li>
+          <li><a href="polissage.html">Polissage & Lustrage</a></li>
+          <li><a href="ceramique.html">Protection Céramique</a></li>
         </ul>
       </div>
     </div>
@@ -56,5 +356,93 @@
   </footer>
 
   <script type="module" src="/src/main.js"></script>
+  <script>
+    /* ---- Avant/Après slider ---- */
+    (function () {
+      const slider  = document.getElementById('baSlider');
+      const apresEl = document.getElementById('baApres');
+      const handleEl = document.getElementById('baHandle');
+      if (!slider) return;
+      let dragging = false;
+
+      function move(pct) {
+        pct = Math.max(0, Math.min(100, pct));
+        // glisser droite → pct augmente → inset diminue → plus d'APRÈS visible
+        apresEl.style.clipPath = `inset(0 0 0 ${100 - pct}%)`;
+        handleEl.style.left = pct + '%';
+      }
+      move(50);
+
+      handleEl.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
+      document.addEventListener('mouseup',   () => dragging = false);
+      document.addEventListener('mousemove', e => {
+        if (!dragging) return;
+        const r = slider.getBoundingClientRect();
+        move((e.clientX - r.left) / r.width * 100);
+      });
+      handleEl.addEventListener('touchstart', e => { dragging = true; }, { passive: true });
+      document.addEventListener('touchend',   () => dragging = false);
+      document.addEventListener('touchmove',  e => {
+        if (!dragging) return;
+        const r = slider.getBoundingClientRect();
+        move((e.touches[0].clientX - r.left) / r.width * 100);
+      }, { passive: true });
+    })();
+
+    /* ---- Tiles sélection ---- */
+    document.querySelectorAll('.sp-tile').forEach(t => {
+      t.addEventListener('click', () => {
+        t.closest('.sp-tiles').querySelectorAll('.sp-tile').forEach(x => x.classList.remove('is-sel'));
+        t.classList.add('is-sel');
+      });
+    });
+
+    /* ---- Time slots ---- */
+    document.querySelectorAll('.sp-slot').forEach(s => {
+      s.addEventListener('click', () => {
+        s.closest('.sp-times').querySelectorAll('.sp-slot').forEach(x => x.classList.remove('is-sel'));
+        s.classList.add('is-sel');
+      });
+    });
+
+    /* ---- Stepper ---- */
+    (function () {
+      const lbls  = ['Service', 'Créneau', 'Contact'];
+      let cur = 1;
+
+      function go(step) {
+        [1, 2, 3].forEach(i => {
+          document.getElementById('panel' + i).classList.toggle('is-active', i === step);
+          const dot = document.getElementById('dot' + i);
+          dot.classList.remove('is-active', 'is-done');
+          if (i === step) dot.classList.add('is-active');
+          else if (i < step) dot.classList.add('is-done');
+          const lbl = document.getElementById('lbl' + i);
+          lbl.classList.toggle('is-active', i === step);
+          lbl.textContent = lbls[i - 1];
+        });
+        [1, 2].forEach(i => {
+          const line = document.getElementById('line' + i);
+          line.classList.toggle('is-done', i < step);
+        });
+        cur = step;
+      }
+
+      document.querySelectorAll('.sp-next').forEach(btn => {
+        btn.addEventListener('click', () => { if (cur < 3) go(cur + 1); });
+      });
+      document.querySelectorAll('.sp-prev').forEach(btn => {
+        btn.addEventListener('click', () => { if (cur > 1) go(cur - 1); });
+      });
+    })();
+
+    /* ---- Set today as min date ---- */
+    const dateInput = document.getElementById('rdvDate');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today;
+      dateInput.value = today;
+    }
+  </script>
 </body>
 </html>

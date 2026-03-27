@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
   --color-primary: #e60000;
+  --color-primary-rgb: 230, 0, 0;
   --color-secondary: #000000;
   --color-bg: #050505;
   --color-bg-alt: rgba(20, 20, 20, 0.7);
@@ -149,6 +150,145 @@ select option { background-color: #111; color: #fff; }
   cursor: pointer;
   color: #fff;
 }
+.menu-toggl.hidden { display: none !important; }
+
+/* REVEAL ANIMATIONS */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* LUXURY SLIDER (PORSCHE STYLE) */
+.luxury-container {
+  padding: 100px 0;
+  overflow: hidden;
+}
+.luxury-header {
+  padding: 0 5vw;
+  margin-bottom: 50px;
+}
+.luxury-header h2 {
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.luxury-header p {
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  max-width: 700px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+.theme-motors .luxury-header h2 span { color: #e60000; font-weight: 600; }
+.theme-detail .luxury-header h2 span { color: #0066ff; font-weight: 600; }
+
+.luxury-slider {
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 30px;
+  scrollbar-width: none;
+}
+.luxury-slider::-webkit-scrollbar { display: none; }
+.slider-track {
+  display: flex;
+  gap: 30px;
+  padding: 0 5vw;
+}
+.slider-item {
+  flex: 0 0 85vw;
+  height: 60vh;
+  position: relative;
+  scroll-snap-align: center;
+  overflow: hidden;
+  cursor: pointer;
+  background: #111;
+}
+@media (min-width: 1024px) {
+  .slider-item { flex: 0 0 33vw; height: 600px; }
+}
+.slider-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0.8;
+}
+.slider-item:hover img {
+  transform: scale(1.05);
+  opacity: 1;
+}
+.slider-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 100%);
+  pointer-events: none;
+}
+.slider-text {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  padding: 40px;
+  z-index: 2;
+  transform: translateY(20px);
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.slider-item:hover .slider-text {
+  transform: translateY(0);
+}
+.slider-text h3 {
+  font-size: 2.2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+.slider-text p {
+  color: #ddd;
+  font-size: 1rem;
+  margin-bottom: 25px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) 0.1s;
+}
+.slider-item:hover .slider-text p {
+  opacity: 1;
+  transform: translateY(0);
+}
+.slider-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+.slider-btn::after {
+  content: '→';
+  font-size: 1.4rem;
+  transition: transform 0.3s;
+}
+.slider-item:hover .slider-btn::after {
+  transform: translateX(8px);
+}
+.theme-motors .slider-item:hover .slider-btn { color: #e60000; }
+.theme-detail .slider-item:hover .slider-btn { color: #0066ff; }
 
 /* Hero Section */
 .hero {
@@ -180,9 +320,11 @@ select option { background-color: #111; color: #fff; }
 }
 
 .hero-content h1 {
-  font-size: 4rem;
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 400;
   margin-bottom: 20px;
-  line-height: 1.1;
+  line-height: 0.95;
   text-transform: uppercase;
 }
 
@@ -344,6 +486,184 @@ footer {
   border-top: 1px solid var(--border-glass);
   color: var(--color-text-muted);
   font-size: 0.9rem;
+}
+
+/* =========================================
+   VERTICAL SERVICES LAYOUT (PORSCHE STYLE)
+   ========================================= */
+
+/* Color helpers */
+.motors-color { color: #e60000; font-weight: 600; }
+.detail-color  { color: #0066ff; font-weight: 600; }
+.motors-accent { background: #e60000; }
+.detail-accent  { background: #0066ff; }
+
+/* Pole Intro */
+.pole-intro {
+  padding: 110px 10vw 80px;
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.pole-intro--detail {
+  border-top: 3px solid #0066ff;
+  margin-top: 40px;
+}
+.pole-tag {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: #e60000;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.detail-tag { color: #0066ff; }
+.pole-intro-inner h2 {
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 0.95;
+  margin-bottom: 22px;
+  color: #fff;
+}
+.pole-intro-inner p {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  max-width: 580px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+/* Service Panels */
+.service-panel {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  min-height: 82vh;
+  overflow: hidden;
+  cursor: pointer;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.service-panel--reverse {
+  grid-template-columns: 45% 55%;
+}
+.service-panel--reverse .service-panel-image { order: 2; }
+.service-panel--reverse .service-panel-body  { order: 1; }
+
+.service-panel-image {
+  position: relative;
+  overflow: hidden;
+}
+.service-panel-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 60%, #050505 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+.service-panel--reverse .service-panel-image::after {
+  background: linear-gradient(to left, transparent 60%, #050505 100%);
+}
+.service-panel-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.75);
+  transition: transform 1.4s cubic-bezier(0.25, 1, 0.5, 1),
+              filter 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.service-panel:hover .service-panel-image img {
+  transform: scale(1.04);
+  filter: brightness(0.95);
+}
+
+.service-panel-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 6vw;
+  background: #050505;
+  position: relative;
+  overflow: hidden;
+}
+.service-num {
+  font-size: clamp(8rem, 13vw, 14rem);
+  font-weight: 800;
+  color: rgba(255,255,255,0.025);
+  position: absolute;
+  bottom: -10px;
+  right: 16px;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.service-accent-line {
+  width: 48px;
+  height: 3px;
+  border-radius: 2px;
+  margin-bottom: 28px;
+  transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.service-panel:hover .service-accent-line { width: 80px; }
+
+.service-panel-body h3 {
+  font-family: 'Bebas Neue', 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 18px;
+  color: #fff;
+  line-height: 0.95;
+}
+.service-panel-body p {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+  max-width: 440px;
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  transition: color 0.3s;
+}
+.service-link span {
+  display: inline-block;
+  font-size: 1.3rem;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.service-panel:hover .motors-link { color: #e60000; }
+.service-panel:hover .detail-link  { color: #0066ff; }
+.service-panel:hover .service-link span { transform: translateX(8px); }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .service-panel,
+  .service-panel--reverse {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .service-panel-image {
+    height: 60vw;
+    min-height: 220px;
+    order: 1 !important;
+  }
+  .service-panel-body { order: 2 !important; padding: 48px 8vw; }
+  .service-panel-image::after,
+  .service-panel--reverse .service-panel-image::after {
+    background: linear-gradient(to top, #050505 0%, transparent 50%) !important;
+  }
+  .pole-intro { padding: 80px 8vw 55px; }
 }
 
 /* Animations */
