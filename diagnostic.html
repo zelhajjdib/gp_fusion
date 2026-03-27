@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnostic Auto | GP Motors</title>
+  <meta name="description" content="Prenez rendez-vous pour un diagnostic complet de votre véhicule chez GP Motors. Experts multimarques avec valises constructeurs de pointe." />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <style>
+    .diag-page {
+      padding: 120px 0 60px;
+      min-height: 100vh;
+      background: radial-gradient(circle at top right, rgba(230,0,0,0.1) 0%, transparent 40%),
+                  radial-gradient(circle at bottom left, rgba(230,0,0,0.05) 0%, transparent 40%);
+    }
+    
+    .diag-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .diag-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .diag-header p {
+      color: var(--color-text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .diag-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .diag-form-box {
+      background: var(--color-bg-alt);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+    .diag-form-box h2 {
+      font-size: 1.6rem;
+      margin-bottom: 25px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 15px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+    .form-group label {
+      font-size: 0.9rem;
+      color: #ddd;
+    }
+    .diag-input, .diag-select, .diag-textarea {
+      background: #111;
+      border: 1px solid var(--border-glass);
+      color: #fff;
+      padding: 14px 15px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      width: 100%;
+    }
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+    }
+    .diag-input:focus, .diag-select:focus, .diag-textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+    .diag-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .diag-btn {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+
+    /* Info Sidebar */
+    .diag-info {
+      padding: 20px 0;
+    }
+    .info-card {
+      background: rgba(10,10,10,0.4);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius);
+      padding: 25px;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: transform 0.3s;
+    }
+    .info-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(230,0,0,0.3);
+    }
+    .info-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(230,0,0,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .info-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--color-primary);
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .info-text h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+    .info-text p {
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    @media (max-width: 900px) {
+      .diag-container {
+        grid-template-columns: 1fr;
+      }
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body style="background-color: #050505; color: #fff;">
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">GP <span>Fusion</span></a>
+      <div class="menu-toggle">☰</div>
+      <nav class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="achat.html">Achat</a>
+        <a href="vente.html">Vente</a>
+        <a href="location.html">Location</a>
+        <a href="diagnostic.html" class="active">Diagnostic</a>
+        <a href="detail.html">GP Detail</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="diag-page">
+    <div class="container">
+      <div class="diag-header">
+        <h1>Demande de <span>Diagnostic</span></h1>
+        <p>Expertise multimarque et valises constructeurs de pointe. Identifiez précisément les anomalies de votre véhicule.</p>
+      </div>
+
+      <div class="diag-container">
+        <!-- Formulaire -->
+        <div class="diag-form-box">
+          <h2>Prendre rendez-vous</h2>
+          <form id="diag-form" onsubmit="event.preventDefault(); alert('Demande de rendez-vous envoyée avec succès ! Notre équipe vous contactera sous 24h.'); this.reset();">
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nom complet</label>
+                <input type="text" class="diag-input" placeholder="Ex: Jean Dupont" required />
+              </div>
+              <div class="form-group">
+                <label>Téléphone</label>
+                <input type="tel" class="diag-input" placeholder="Ex: 06 12 34 56 78" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label>Adresse Email</label>
+                <input type="email" class="diag-input" placeholder="Ex: email@domaine.com" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Marque et Modèle du véhicule</label>
+                <input type="text" class="diag-input" placeholder="Ex: Audi A3" required />
+              </div>
+              <div class="form-group">
+                <label>Année / Kilométrage</label>
+                <input type="text" class="diag-input" placeholder="Ex: 2018 - 85000 km" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label>Motif du diagnostic</label>
+                <select class="diag-select" required>
+                  <option value="" disabled selected>Sélectionnez un motif</option>
+                  <option value="Voyant allumé au tableau de bord">Voyant allumé au tableau de bord</option>
+                  <option value="Bruit anormal (Moteur, train roulant...)">Bruit anormal (Moteur, train roulant...)</option>
+                  <option value="Problème de puissance / Ratés moteur">Problème de puissance / Ratés moteur</option>
+                  <option value="Problème électronique / Inforadiateur">Problème électronique / Multimédia</option>
+                  <option value="Révision complète informatisée">Révision complète et check-up</option>
+                  <option value="Autre">Autre (Précisez en description)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label>Date et heure souhaitées</label>
+                <input type="datetime-local" class="diag-input" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group full">
+                <label>Description détaillée (Symptômes constatés)</label>
+                <textarea class="diag-textarea" placeholder="Décrivez les anomalies que vous avez remarquées..." required></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="btn diag-btn">Confirmer la demande</button>
+          </form>
+        </div>
+
+        <!-- Infos -->
+        <div class="diag-info">
+          
+          <div class="info-card">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            </div>
+            <div class="info-text">
+              <h3>Expertise Technologique</h3>
+              <p>Nos ateliers sont équipés de valises de diagnostic officielles multi-constructeurs pour des lectures précises de tous les calculateurs.</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div class="info-text">
+              <h3>Rapport Transparent</h3>
+              <p>A l'issue du diagnostic, nous vous fournissons un compte-rendu clair, des codes d'erreurs et un devis de réparation 100% transparent.</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div class="info-text">
+              <h3>Prise en charge rapide</h3>
+              <p>Parce qu'un voyant allumé ne doit pas attendre, nous garantissons des créneaux de diagnostic en urgence sous 48 heures maximum.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h3>GP Motors</h3>
+        <p>Expert en achat, vente, et dépôt-vente de véhicules d'exception.</p>
+        <p>Service de recherche personnalisée et remorquage disponible.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Contact</h3>
+        <p>123 Avenue de l'Automobile, Paris</p>
+        <p>vente@gpmotors.fr | +33 1 23 45 67 89</p>
+      </div>
+      <div class="footer-col">
+        <h3>Liens Utiles</h3>
+        <ul class="footer-links" style="list-style:none; padding:0; margin:0;">
+          <li><a href="achat.html" style="color:var(--color-text-muted);">Inventaire</a></li>
+          <li><a href="diagnostic.html" style="color:var(--color-text-muted);">Prendre RDV Diagnostic</a></li>
+          <li><a href="vente.html" style="color:var(--color-text-muted);">Dépôt Vente</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 GP Fusion. Tous droits réservés.</div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
