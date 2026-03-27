@@ -22,50 +22,112 @@
         <a href="vente.html">Vente</a>
         <a href="location.html">Location</a>
         <a href="diagnostic.html">Diagnostic</a>
-        <a href="detail.html">GP Detail</a>
+        <a href="nettoyage.html">Nettoyage</a>
+        <a href="polissage.html">Polissage</a>
+        <a href="ceramique.html">Céramique</a>
       </nav>
     </div>
   </header>
 
   <!-- HERO -->
-  <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=2069');">
+  <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=2069');">
     <div class="hero-content">
       <h1>L'Excellence <br><span>Automobile</span></h1>
-      <p>Bienvenue chez GP Fusion. Découvrez nos services exclusifs avec GP Motors pour vos véhicules et GP Detail pour un esthétisme parfait.</p>
-      <div class="hero-actions">
-        <a href="achat.html" class="btn">Nos Véhicules</a>
-        <a href="detail.html" class="btn btn-outline">Services Detailing</a>
+      <p style="margin-top:20px; font-size:1.2rem; color:#ddd; max-width:800px; margin-left:auto; margin-right:auto;">
+        Bienvenue chez <strong>GP Fusion</strong>. 
+        Découvrez l'envergure de nos deux pôles d'excellence :
+        <strong style="color: #ff3333;">GP Motors</strong> pour la vente et l'entretien de véhicules d'exception, et 
+        <strong style="color: #3388ff;">GP Detail</strong> pour la sublimation esthétique.
+      </p>
+    </div>
+  </section>
+
+  <!-- MOTORS SECTION -->
+  <section class="service-section theme-motors" id="gp-motors">
+    <div class="container">
+      <div class="section-badge motors-badge">GP Motors</div>
+      <h2 class="section-title">Vente & <span>Services Auto</span></h2>
+      <p class="section-desc">L'exigence et le professionnalisme au service de votre mobilité. Un panel complet pour l'achat, la location et l'entretien de votre véhicule.</p>
+
+      <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="card" onclick="location.href='achat.html'">
+          <div class="card-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=2070" loading="lazy" alt="Achat" class="card-img" />
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Achat</h3>
+            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Explorez notre inventaire de véhicules d'exception disponibles immédiatement.</p>
+          </div>
+        </div>
+
+        <div class="card" onclick="location.href='vente.html'">
+          <div class="card-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&q=80&w=2071" loading="lazy" alt="Vente" class="card-img" />
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Vente & Dépôt</h3>
+            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Confiez-nous la revente de votre véhicule en toute sécurité et discrétion.</p>
+          </div>
+        </div>
+
+        <div class="card" onclick="location.href='location.html'">
+          <div class="card-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80&w=2070" loading="lazy" alt="Location" class="card-img" />
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Location</h3>
+            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Louez l'excellence le temps d'un weekend ou pour vos déplacements pro.</p>
+          </div>
+        </div>
+
+        <div class="card" onclick="location.href='diagnostic.html'">
+          <div class="card-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&q=80&w=2026" loading="lazy" alt="Diagnostic" class="card-img" />
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Diagnostic</h3>
+            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Analyse complète à la valise constructeur et entretien périodique.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURES SPLIT -->
-  <section class="grid-section">
+  <!-- DETAIL SECTION -->
+  <section class="service-section theme-detail" id="gp-detail" style="border-top: 1px solid var(--border-glass);">
     <div class="container">
-      <h2 class="section-title">Nos <span>Marques</span></h2>
-      <div class="cards">
-        <!-- GP Motors -->
-        <div class="card" onclick="location.href='achat.html'">
+      <div class="section-badge detail-badge">GP Detail</div>
+      <h2 class="section-title">Esthétique & <span>Sublimation</span></h2>
+      <p class="section-desc">Nettoyage profond, polissage et protection longue durée. Des prestations exigeantes pour magnifier votre carrosserie et votre habitacle.</p>
+
+      <div class="cards" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+        <div class="card" onclick="location.href='nettoyage.html'">
           <div class="card-img-wrapper">
-             <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=2070" loading="lazy" alt="GP Motors" class="card-img" />
-             <span class="card-badge" style="background: var(--color-primary)">GP Motors</span>
+             <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=2070" loading="lazy" alt="Nettoyage" class="card-img" />
           </div>
           <div class="card-content">
-            <h3 class="card-title">Vente & Location</h3>
-            <p class="card-subtitle">Achat, Vente, Location, Dépôt Vente, Remorquage</p>
-            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Trouvez le véhicule exigeant ou confiez-nous le vôtre en toute sécurité.</p>
+            <h3 class="card-title">Nettoyage</h3>
+            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Nettoyage vapeur, pressing des sièges, et décontamination extérieure.</p>
           </div>
         </div>
-        <!-- GP Detail -->
-        <div class="card" onclick="location.href='detail.html'">
+
+        <div class="card" onclick="location.href='polissage.html'">
           <div class="card-img-wrapper">
-             <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&q=80&w=2070" loading="lazy" alt="GP Detail" class="card-img" />
-             <span class="card-badge" style="background: #fff; color: #000;">GP Detail</span>
+             <img src="https://images.unsplash.com/photo-1550215758-cda6fccf6388?auto=format&fit=crop&q=80&w=1951" loading="lazy" alt="Polishing" class="card-img" />
           </div>
           <div class="card-content">
-            <h3 class="card-title">Nettoyage & Polishing</h3>
-            <p class="card-subtitle">Esthétique Automobile de Précision</p>
-            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Redonnez l'éclat du neuf à votre véhicule avec nos prestations premium.</p>
+            <h3 class="card-title">Polissage</h3>
+            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Correction des micro-rayures et hologrammes. Rendu éclat showroom.</p>
+          </div>
+        </div>
+
+        <div class="card" onclick="location.href='ceramique.html'">
+          <div class="card-img-wrapper">
+             <img src="https://images.unsplash.com/photo-1610647752706-3bb12232b3ab?auto=format&fit=crop&q=80&w=2059" loading="lazy" alt="Céramique" class="card-img" />
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Céramique</h3>
+            <p style="color: var(--color-text-muted); font-size: 0.95rem;">Protection carrosserie hydrophobe et résistante pour plusieurs années.</p>
           </div>
         </div>
       </div>
