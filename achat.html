@@ -6,10 +6,11 @@
   <title>Achat de Véhicules d'Exception | GP Motors</title>
   <meta name="description" content="Découvrez l'inventaire exclusif de GP Motors. Des véhicules d'exception, rigoureusement sélectionnés, disponibles à l'achat." />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="/src/style.css" />
   <!-- Import specific catalog styles via a link tag or inside main.js -->
   <link rel="stylesheet" href="/src/catalog.css">
 </head>
-<body>
+<body style="background-color: #050505; color: #fff;">
   <header class="header">
     <div class="container">
       <a href="index.html" class="logo">GP <span>Fusion</span></a>
@@ -34,49 +35,214 @@
       <div class="catalog-container">
         <!-- SIDEBAR FILTERS -->
         <aside class="filters-sidebar">
-          <h3>Filtres <span>Réinitialiser</span></h3>
+          <h3>Filtres <span id="reset-span" style="cursor: pointer; transition: color 0.3s;" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color=''">Réinitialiser</span></h3>
           
           <div class="filter-group">
             <label>Marque</label>
-            <select class="filter-select">
-              <option value="Toutes">Toutes les marques</option>
-              <option value="Porsche">Porsche</option>
-              <option value="Mercedes">Mercedes-Benz</option>
-              <option value="Audi">Audi</option>
-              <option value="Ferrari">Ferrari</option>
-              <option value="Lamborghini">Lamborghini</option>
-            </select>
+            <div class="custom-select-wrapper" id="brand-select-wrapper">
+              <input type="text" id="filter-brand" class="filter-select" placeholder="Toutes les marques" autocomplete="off" />
+              <ul id="brand-select-list" class="custom-select-list">
+                <li class="custom-select-group">Marques Courantes</li>
+                <li data-value="Audi">Audi</li>
+                <li data-value="BMW">BMW</li>
+                <li data-value="Citroën">Citroën</li>
+                <li data-value="Fiat">Fiat</li>
+                <li data-value="Ford">Ford</li>
+                <li data-value="Mercedes-Benz">Mercedes-Benz</li>
+                <li data-value="Opel">Opel</li>
+                <li data-value="Peugeot">Peugeot</li>
+                <li data-value="Renault">Renault</li>
+                <li data-value="Volkswagen">Volkswagen</li>
+                <li class="custom-select-group">Autres Marques</li>
+                <li data-value="Abarth">Abarth</li>
+                <li data-value="AC">AC</li>
+                <li data-value="Acura">Acura</li>
+                <li data-value="Aiways">Aiways</li>
+                <li data-value="Aixam">Aixam</li>
+                <li data-value="Alfa Romeo">Alfa Romeo</li>
+                <li data-value="Alpina">Alpina</li>
+                <li data-value="Alpine">Alpine</li>
+                <li data-value="Alvis">Alvis</li>
+                <li data-value="AMC">AMC</li>
+                <li data-value="Ariel">Ariel</li>
+                <li data-value="Aro">Aro</li>
+                <li data-value="Aston Martin">Aston Martin</li>
+                <li data-value="Austin">Austin</li>
+                <li data-value="Austin Healey">Austin Healey</li>
+                <li data-value="Autobianchi">Autobianchi</li>
+                <li data-value="Auverland">Auverland</li>
+                <li data-value="Beijing">Beijing</li>
+                <li data-value="Bellier">Bellier</li>
+                <li data-value="Bentley">Bentley</li>
+                <li data-value="Bertone">Bertone</li>
+                <li data-value="Bluecar">Bluecar</li>
+                <li data-value="Bugatti">Bugatti</li>
+                <li data-value="Buick">Buick</li>
+                <li data-value="BYD">BYD</li>
+                <li data-value="Cadillac">Cadillac</li>
+                <li data-value="Casalini">Casalini</li>
+                <li data-value="Caterham">Caterham</li>
+                <li data-value="Chatenet">Chatenet</li>
+                <li data-value="Chevrolet">Chevrolet</li>
+                <li data-value="Chrysler">Chrysler</li>
+                <li data-value="Cupra">Cupra</li>
+                <li data-value="Dacia">Dacia</li>
+                <li data-value="Daewoo">Daewoo</li>
+                <li data-value="DAF">DAF</li>
+                <li data-value="Daihatsu">Daihatsu</li>
+                <li data-value="Daimler">Daimler</li>
+                <li data-value="Dangel">Dangel</li>
+                <li data-value="Datsun">Datsun</li>
+                <li data-value="De Lorean">De Lorean</li>
+                <li data-value="De Tomaso">De Tomaso</li>
+                <li data-value="Delage">Delage</li>
+                <li data-value="Delahaye">Delahaye</li>
+                <li data-value="Dodge">Dodge</li>
+                <li data-value="DS">DS</li>
+                <li data-value="Elaris">Elaris</li>
+                <li data-value="Excalibur">Excalibur</li>
+                <li data-value="Facel Vega">Facel Vega</li>
+                <li data-value="Ferrari">Ferrari</li>
+                <li data-value="Fisker">Fisker</li>
+                <li data-value="Foton">Foton</li>
+                <li data-value="Geely">Geely</li>
+                <li data-value="General Motors">General Motors</li>
+                <li data-value="Genesis">Genesis</li>
+                <li data-value="Gurgel">Gurgel</li>
+                <li data-value="Honda">Honda</li>
+                <li data-value="Hongqi">Hongqi</li>
+                <li data-value="Hotchkiss">Hotchkiss</li>
+                <li data-value="Hummer">Hummer</li>
+                <li data-value="Hyundai">Hyundai</li>
+                <li data-value="IMF">IMF</li>
+                <li data-value="Ineos">Ineos</li>
+                <li data-value="Infiniti">Infiniti</li>
+                <li data-value="Innocenti">Innocenti</li>
+                <li data-value="Isuzu">Isuzu</li>
+                <li data-value="Jaecoo">Jaecoo</li>
+                <li data-value="Jaguar">Jaguar</li>
+                <li data-value="JDM Simpa">JDM Simpa</li>
+                <li data-value="Jeep">Jeep</li>
+                <li data-value="Jensen">Jensen</li>
+                <li data-value="Kia">Kia</li>
+                <li data-value="KTM">KTM</li>
+                <li data-value="Lada">Lada</li>
+                <li data-value="Lamborghini">Lamborghini</li>
+                <li data-value="Lancia">Lancia</li>
+                <li data-value="Land-Rover">Land-Rover</li>
+                <li data-value="Leapmotor">Leapmotor</li>
+                <li data-value="LEVC">LEVC</li>
+                <li data-value="Lexus">Lexus</li>
+                <li data-value="Ligier">Ligier</li>
+                <li data-value="Lincoln">Lincoln</li>
+                <li data-value="Lotus">Lotus</li>
+                <li data-value="Lynk&Co">Lynk&Co</li>
+                <li data-value="Mahindra">Mahindra</li>
+                <li data-value="Marcos">Marcos</li>
+                <li data-value="Maserati">Maserati</li>
+                <li data-value="Matra">Matra</li>
+                <li data-value="Maybach">Maybach</li>
+                <li data-value="Mazda">Mazda</li>
+                <li data-value="McLaren">McLaren</li>
+                <li data-value="Mega">Mega</li>
+                <li data-value="Mercury">Mercury</li>
+                <li data-value="MG">MG/MG Motor</li>
+                <li data-value="Mia Electric">Mia Electric</li>
+                <li data-value="Microcar">Microcar</li>
+                <li data-value="Microdrive">Microdrive</li>
+                <li data-value="Mini">Mini</li>
+                <li data-value="Mitsubishi">Mitsubishi</li>
+                <li data-value="Mobilize">Mobilize</li>
+                <li data-value="Morgan">Morgan</li>
+                <li data-value="Morris">Morris</li>
+                <li data-value="MPM">MPM</li>
+                <li data-value="Nio">Nio</li>
+                <li data-value="Nissan">Nissan</li>
+                <li data-value="NSU">NSU</li>
+                <li data-value="Oldsmobile">Oldsmobile</li>
+                <li data-value="Panhard">Panhard</li>
+                <li data-value="Panther">Panther</li>
+                <li data-value="PGO">PGO</li>
+                <li data-value="Piaggio">Piaggio</li>
+                <li data-value="Plymouth">Plymouth</li>
+                <li data-value="Polestar">Polestar</li>
+                <li data-value="Pontiac">Pontiac</li>
+                <li data-value="Porsche">Porsche</li>
+                <li data-value="Proton">Proton</li>
+                <li data-value="Rolls-Royce">Rolls-Royce</li>
+                <li data-value="Rover">Rover</li>
+                <li data-value="Saab">Saab</li>
+                <li data-value="Santana">Santana</li>
+                <li data-value="Seat">Seat</li>
+                <li data-value="Seres">Seres</li>
+                <li data-value="Silence">Silence</li>
+                <li data-value="Simca">Simca</li>
+                <li data-value="Simplici">Simplici</li>
+                <li data-value="Skoda">Skoda</li>
+                <li data-value="Skyworth">Skyworth</li>
+                <li data-value="Smart">Smart</li>
+                <li data-value="Ssangyong">Ssangyong</li>
+                <li data-value="Studebaker">Studebaker</li>
+                <li data-value="Subaru">Subaru</li>
+                <li data-value="Sunbeam">Sunbeam</li>
+                <li data-value="Suzuki">Suzuki</li>
+                <li data-value="Talbot">Talbot</li>
+                <li data-value="Tesla">Tesla</li>
+                <li data-value="Toyota">Toyota</li>
+                <li data-value="Trabant">Trabant</li>
+                <li data-value="Triumph">Triumph</li>
+                <li data-value="TVR">TVR</li>
+                <li data-value="UMM">UMM</li>
+                <li data-value="Venturi">Venturi</li>
+                <li data-value="Vespa">Vespa</li>
+                <li data-value="Vinfast">Vinfast</li>
+                <li data-value="Volvo">Volvo</li>
+                <li data-value="XEV">XEV</li>
+                <li data-value="XPeng">XPeng</li>
+                <li data-value="Zeekr">Zeekr</li>
+                <li data-value="Autre">Autre</li>
+              </ul>
+            </div>
           </div>
 
           <div class="filter-group">
             <label>Modèle</label>
-            <select class="filter-select">
+            <select class="filter-select" id="filter-model">
               <option value="Tous">Tous les modèles</option>
               <option value="911">911</option>
-              <option value="AMG GT">AMG GT</option>
+              <option value="C63">C 63 S</option>
               <option value="RS6">RS6</option>
+              <option value="488">488 GTB</option>
             </select>
+          </div>
+
+          <div class="filter-group">
+            <label>Prix (€)</label>
+            <div class="filter-range">
+              <input type="number" id="filter-price-min" placeholder="Min" />
+              <input type="number" id="filter-price-max" placeholder="Max" />
+            </div>
           </div>
 
           <div class="filter-group">
             <label>Année</label>
             <div class="filter-range">
-              <input type="text" placeholder="Min" />
-              <input type="text" placeholder="Max" />
+              <input type="number" id="filter-year-min" placeholder="Min" />
+              <input type="number" id="filter-year-max" placeholder="Max" />
             </div>
           </div>
 
           <div class="filter-group">
             <label>Kilométrage (km)</label>
             <div class="filter-range">
-              <input type="text" placeholder="Min" />
-              <input type="text" placeholder="Max" />
+              <input type="number" id="filter-km-min" placeholder="Min" />
+              <input type="number" id="filter-km-max" placeholder="Max" />
             </div>
           </div>
 
           <div class="filter-group">
             <label>Énergie</label>
-            <select class="filter-select">
+            <select class="filter-select" id="filter-energy">
               <option value="Toutes">Toutes</option>
               <option value="Essence">Essence</option>
               <option value="Diesel">Diesel</option>
@@ -85,15 +251,25 @@
             </select>
           </div>
 
-          <button class="btn" style="width: 100%; margin-top: 10px;">Rechercher (4)</button>
+          <div class="filter-group">
+            <label>Boîte de vitesse</label>
+            <select class="filter-select" id="filter-gearbox">
+              <option value="Toutes">Toutes</option>
+              <option value="Automatique">Automatique</option>
+              <option value="Manuel">Manuel</option>
+            </select>
+          </div>
+
+          <button id="filter-btn" class="btn" style="width: 100%; margin-top: 10px;">Rechercher</button>
+          <button id="reset-btn" class="btn btn-outline" style="width: 100%; margin-top: 10px; background: transparent; border: 1px solid #fff; color: #fff;">Réinitialiser</button>
         </aside>
 
         <!-- RESULTS SECTION -->
         <section class="results-main">
           <div class="results-header">
-            <div class="results-count">4 véhicules disponibles</div>
+            <div class="results-count" id="results-count">4 véhicules disponibles</div>
             <div class="results-sort">
-              <select>
+              <select id="sort-select">
                 <option value="recent">Tri : Plus récents</option>
                 <option value="price-asc">Tri : Prix croissant</option>
                 <option value="price-desc">Tri : Prix décroissant</option>
@@ -104,7 +280,7 @@
 
           <div class="vehicle-list-view">
             <!-- CAR 1 -->
-            <article class="v-card-horizontal">
+            <article class="v-card-horizontal" data-brand="Porsche" data-model="911" data-year="2021" data-km="15400" data-energy="Essence" data-price="124900" data-gearbox="Automatique">
               <div class="v-card-img-wrap">
 
                 <img src="https://images.unsplash.com/photo-1503376712341-ea782eb86895?auto=format&fit=crop&q=80&w=2070" alt="Porsche 911" class="v-card-img" />
@@ -142,7 +318,7 @@
             </article>
 
             <!-- CAR 2 -->
-            <article class="v-card-horizontal">
+            <article class="v-card-horizontal" data-brand="Mercedes-Benz" data-model="C63" data-year="2020" data-km="32500" data-energy="Essence" data-price="85900" data-gearbox="Automatique">
               <div class="v-card-img-wrap">
 
                 <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=2070" alt="Mercedes AMG" class="v-card-img" />
@@ -176,7 +352,7 @@
             </article>
 
             <!-- CAR 3 -->
-            <article class="v-card-horizontal">
+            <article class="v-card-horizontal" data-brand="Audi" data-model="RS6" data-year="2022" data-km="18200" data-energy="Hybride" data-price="138500" data-gearbox="Automatique">
               <div class="v-card-img-wrap">
 
                 <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&q=80&w=1964" alt="Audi RS6" class="v-card-img" />
@@ -211,7 +387,7 @@
 
 
             <!-- CAR 4 -->
-            <article class="v-card-horizontal">
+            <article class="v-card-horizontal" data-brand="Ferrari" data-model="488" data-year="2018" data-km="24000" data-energy="Essence" data-price="215000" data-gearbox="Automatique">
               <div class="v-card-img-wrap">
 
                 <img src="https://images.unsplash.com/photo-1544839655-3645b0a394ec?auto=format&fit=crop&q=80&w=2070" alt="Ferrari 488" class="v-card-img" />

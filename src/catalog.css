@@ -1,7 +1,7 @@
 /* Catalog specific styles */
 .catalog-page {
   padding-top: 100px;
-  background-color: var(--color-bg);
+  background: transparent;
   min-height: 100vh;
 }
 
@@ -46,14 +46,16 @@
 
 /* Sidebar Filters */
 .filters-sidebar {
-  background: linear-gradient(145deg, #161616, #0d0d0d);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--color-bg-alt);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius);
   padding: 30px 20px;
   height: fit-content;
   position: sticky;
   top: 100px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .filters-sidebar h3 {
@@ -290,8 +292,10 @@
 }
 
 .v-card-horizontal {
-  background: linear-gradient(145deg, #1c1c1c, #121212);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--color-bg-alt);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--border-glass);
   border-radius: var(--radius);
   overflow: hidden;
   display: flex;
@@ -300,7 +304,7 @@
   position: relative;
   cursor: pointer;
   height: 240px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .v-card-horizontal:hover {
@@ -415,5 +419,60 @@
   .v-card-horizontal .v-btn {
     margin-left: 0;
   }
+}
+
+.v-card-horizontal.hidden {
+  display: none !important;
+}
+
+/* Custom Select list for Brands */
+.custom-select-wrapper {
+  position: relative;
+}
+
+.custom-select-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  background: var(--color-bg-alt);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  z-index: 100;
+  display: none;
+  list-style: none;
+  padding: 10px 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  margin-top: 5px;
+}
+
+.custom-select-list.show {
+  display: block;
+}
+
+.custom-select-list li {
+  padding: 8px 15px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.custom-select-list li:hover:not(.custom-select-group) {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-primary);
+}
+
+.custom-select-group {
+  font-size: 0.8rem !important;
+  text-transform: uppercase;
+  color: var(--color-text-muted) !important;
+  padding: 5px 15px;
+  margin-top: 5px;
+  pointer-events: none;
 }
 
