@@ -59,6 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const cars = Array.from(vehicleListView.querySelectorAll('.v-card-horizontal'));
     const resultsCount = document.querySelector('#results-count');
 
+    // Make cars clickable entirely
+    cars.forEach(car => {
+      car.style.cursor = 'pointer';
+      car.addEventListener('click', (e) => {
+        // Prevent trigger if clicking an existing link to prevent double navigation
+        if (!e.target.closest('a') && !e.target.closest('button')) {
+          window.location.href = 'vehicule.html';
+        }
+      });
+    });
+
     if (brandInput && brandList) {
       brandInput.addEventListener('focus', () => brandList.classList.add('show'));
       
