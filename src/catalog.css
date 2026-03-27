@@ -1,0 +1,419 @@
+/* Catalog specific styles */
+.catalog-page {
+  padding-top: 100px;
+  background-color: var(--color-bg);
+  min-height: 100vh;
+}
+
+.catalog-header {
+  padding: 60px 0 40px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-glass);
+  margin-bottom: 40px;
+}
+
+.catalog-header h1 {
+  font-size: 3.5rem;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.catalog-header h1::before {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 4px;
+  background: var(--color-primary);
+}
+
+.catalog-header p {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  max-width: 600px;
+}
+
+.catalog-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  padding-bottom: 100px;
+}
+
+/* Sidebar Filters */
+.filters-sidebar {
+  background: linear-gradient(145deg, #161616, #0d0d0d);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
+  padding: 30px 20px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.filters-sidebar h3 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.filters-sidebar h3 span {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  text-transform: none;
+}
+.filters-sidebar h3 span:hover { color: var(--color-primary); }
+
+.filter-group {
+  margin-bottom: 25px;
+}
+.filter-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.filter-select {
+  width: 100%;
+  padding: 12px 15px;
+  background: #0f0f0f;
+  border: 1px solid var(--border-glass);
+  color: #fff;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  transition: var(--transition);
+}
+.filter-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.filter-range {
+  display: flex;
+  gap: 10px;
+}
+.filter-range input {
+  width: 100%;
+  padding: 10px;
+  background: #0f0f0f;
+  border: 1px solid var(--border-glass);
+  color: #fff;
+  border-radius: 6px;
+  font-family: inherit;
+  text-align: center;
+}
+.filter-range input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* Results Grid */
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.results-count {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.results-sort select {
+  padding: 8px 15px;
+  background: transparent;
+  border: 1px solid var(--border-glass);
+  color: #fff;
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.v-card {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+  cursor: pointer;
+}
+.v-card:hover {
+  border-color: rgba(230,0,0,0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+.v-card-img-wrap {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+.v-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: trasform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.v-card:hover .v-card-img {
+  transform: scale(1.05);
+}
+
+.v-card-badges {
+  position: absolute;
+  top: 15px; left: 15px;
+  display: flex;
+  gap: 8px;
+}
+.v-badge {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+.v-badge-dark {
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(5px);
+}
+
+.v-card-body {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.v-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+}
+.v-card-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.v-card-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-glass);
+}
+.v-spec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+.v-spec svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--color-primary);
+}
+
+.v-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+.v-price {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+.v-btn {
+  padding: 10px 20px;
+  border: 1px solid var(--border-glass);
+  background: transparent;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  text-transform: uppercase;
+}
+.v-card:hover .v-btn {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .catalog-container {
+    grid-template-columns: 1fr;
+  }
+  .filters-sidebar {
+    position: static;
+  }
+}
+
+
+/* --- LIST VIEW --- */
+.vehicle-list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.v-card-horizontal {
+  background: linear-gradient(145deg, #1c1c1c, #121212);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  transition: var(--transition);
+  position: relative;
+  cursor: pointer;
+  height: 240px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.v-card-horizontal:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(230, 0, 0, 0.15);
+}
+
+.v-card-horizontal .v-card-img-wrap {
+  width: 320px;
+  height: 100%;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Re-use image scale on hover */
+.v-card-horizontal:hover .v-card-img {
+  transform: scale(1.05);
+}
+
+.v-card-horizontal .v-card-body {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.v-card-horizontal .v-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.v-card-horizontal .v-card-subtitle {
+  font-size: 0.95rem;
+  color: #bbb;
+  margin-bottom: 20px;
+}
+
+.v-card-horizontal .v-card-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.v-card-horizontal .v-spec {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #ddd;
+  margin-right: 15px;
+}
+
+.v-card-horizontal .v-spec svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--color-primary);
+}
+
+.v-card-horizontal .v-card-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.v-card-horizontal .v-price {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+/* Re-use button styles inside horizontal card */
+.v-card-horizontal .v-btn {
+  padding: 10px 25px;
+  border: 1px solid var(--border-glass);
+  background: transparent;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  text-transform: uppercase;
+  margin-left: auto;
+}
+
+.v-card-horizontal:hover .v-btn {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+@media (max-width: 768px) {
+  .v-card-horizontal {
+    flex-direction: column;
+    height: auto;
+  }
+  .v-card-horizontal .v-card-img-wrap {
+    width: 100%;
+    height: 220px;
+  }
+  .v-card-horizontal .v-card-footer {
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .v-card-horizontal .v-btn {
+    margin-left: 0;
+  }
+}
+
