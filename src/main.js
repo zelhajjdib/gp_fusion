@@ -1,38 +1,23 @@
 import './style.css';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Sticky header change on scroll
-  const header = document.querySelector('.header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.style.background = 'rgba(10, 10, 10, 0.95)';
-      header.style.borderBottom = '1px solid var(--color-primary)';
-    } else {
-      header.style.background = 'var(--color-glass)';
-      header.style.borderBottom = '1px solid var(--border-glass)';
-    }
-  });
-
-  // Mobile Menu Toggle
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (menuToggle && navLinks) {
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navOverlay = document.getElementById('navOverlay');
+  const navClose = document.getElementById('navClose');
+  if (hamburger && navOverlay) {
+    hamburger.addEventListener('click', () => {
+      navOverlay.classList.add('is-open');
+      hamburger.classList.add('is-open');
     });
+    const close = () => {
+      navOverlay.classList.remove('is-open');
+      hamburger.classList.remove('is-open');
+    };
+    if (navClose) navClose.addEventListener('click', close);
+    navOverlay.addEventListener('click', e => { if (e.target === navOverlay) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
   }
-
-  // Set active link
-  const currentPath = window.location.pathname;
-  const links = document.querySelectorAll('.nav-links a');
-  links.forEach(link => {
-    if (link.getAttribute('href') && currentPath.endsWith(link.getAttribute('href'))) {
-      link.classList.add('active');
-    }
-    if (currentPath === '/' && link.getAttribute('href') === 'index.html') {
-      link.classList.add('active');
-    }
-  });
 
   // Catalog filtering logic
   const catalogPage = document.querySelector('.catalog-page');
