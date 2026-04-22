@@ -12,8 +12,8 @@ export default defineConfig({
         location:    resolve(__dirname, 'location.html'),
         diagnostic:  resolve(__dirname, 'diagnostic.html'),
         nettoyage:   resolve(__dirname, 'nettoyage.html'),
-        polissage:   resolve(__dirname, 'polissage.html'),
-        ceramique:   resolve(__dirname, 'ceramique.html'),
+        phare:       resolve(__dirname, 'phare.html'),
+        contact:     resolve(__dirname, 'contact.html'),
         vehicule:    resolve(__dirname, 'vehicule.html'),
         detail:      resolve(__dirname, 'detail.html'),
       }

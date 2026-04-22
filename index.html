@@ -11,13 +11,12 @@
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body style="background-color: #050505; color: #fff;">
-    <!-- HEADER -->
+      <!-- HEADER -->
   <header class="header">
     <div class="container">
+      <a href="index.html" class="logo"><img src="/gp_motors.png" class="logo-img" alt="GP Motors" /><img src="/gp_detail.png" class="logo-img" alt="GP Detail" /></a>
       <span class="nav-tagline">L’excellence automobile, redéfinie.</span>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
   <!-- NAV OVERLAY -->
@@ -25,19 +24,20 @@
     <button class="nav-close" id="navClose">✕</button>
     <div class="nav-overlay-inner">
       <div class="nav-ol-group">
-        <span class="nav-ol-pole nav-ol-pole--motors"><span class="logo-gp logo-gp--motors">GP</span> Motors</span>
-        <a href="achat.html" class="nav-ol-link">Achat</a>
-        <a href="vente.html" class="nav-ol-link">Vente</a>
+        <img src="/gp_motors_crop.png" class="nav-ol-logo" alt="GP Motors" />
+        <a href="achat.html" class="nav-ol-link">Vente</a>
+        <a href="vente.html" class="nav-ol-link">Reprise</a>
         <a href="location.html" class="nav-ol-link">Location</a>
         <a href="diagnostic.html" class="nav-ol-link">Diagnostic</a>
       </div>
       <div class="nav-ol-divider"></div>
       <div class="nav-ol-group">
-        <span class="nav-ol-pole nav-ol-pole--detail"><span class="logo-gp logo-gp--detail">GP</span> Detail</span>
+        <img src="/gp_detail_crop.png" class="nav-ol-logo" alt="GP Detail" />
         <a href="nettoyage.html" class="nav-ol-link">Nettoyage</a>
-        <a href="polissage.html" class="nav-ol-link">Polissage</a>
-        <a href="ceramique.html" class="nav-ol-link">Céramique</a>
+        <a href="phare.html" class="nav-ol-link">Rénovation Phare</a>
       </div>
+      <div class="nav-ol-divider"></div>
+      <a href="contact.html" class="nav-ol-link" style="font-size:1.6rem;">Contact</a>
       <a href="index.html" class="nav-ol-home">← Accueil</a>
     </div>
   </nav>
@@ -46,7 +46,7 @@
     <!-- MASSIVE PORSCHE-STYLE HERO -->
     <section class="porsche-hero reveal" style="position: relative; height: 100vh; display: flex; align-items: flex-end; padding: 7vw;">
       <div style="position: absolute; inset: 0; z-index: -1;">
-        <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=2069" style="width: 100%; height: 100%; object-fit: cover;" alt="GP Fusion Hero" />
+        <img src="/rs6.png" style="width: 100%; height: 100%; object-fit: cover;" alt="GP Fusion Hero" />
         <div style="position: absolute; inset: 0; background: linear-gradient(to top, #050505 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.6) 100%);"></div>
       </div>
       <div style="max-width: 800px; padding-bottom: 50px;">
@@ -66,29 +66,29 @@
       </div>
     </section>
 
-    <!-- SERVICE 01: Achat -->
+    <!-- SERVICE 01: Vente -->
     <article class="service-panel reveal" onclick="location.href='achat.html'">
       <div class="service-panel-image">
-        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=2070" loading="lazy" alt="Achat" />
+        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=2070" loading="lazy" alt="Vente" />
       </div>
       <div class="service-panel-body">
         <span class="service-num">01</span>
         <div class="service-accent-line motors-accent"></div>
-        <h3>Achat</h3>
+        <h3>Vente</h3>
         <p>Explorez notre inventaire de véhicules d'exception, contrôlés et disponibles immédiatement.</p>
         <div class="service-link motors-link">Explorer les modèles <span>→</span></div>
       </div>
     </article>
 
-    <!-- SERVICE 02: Vente (inversé) -->
+    <!-- SERVICE 02: Reprise (inversé) -->
     <article class="service-panel service-panel--reverse reveal" onclick="location.href='vente.html'">
       <div class="service-panel-image">
-        <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&q=80&w=2071" loading="lazy" alt="Vente" />
+        <img src="https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&q=80&w=2071" loading="lazy" alt="Reprise" />
       </div>
       <div class="service-panel-body">
         <span class="service-num">02</span>
         <div class="service-accent-line motors-accent"></div>
-        <h3>Vente & Dépôt</h3>
+        <h3>Reprise</h3>
         <p>Confiez-nous la revente de votre véhicule en toute sécurité, discrétion et rentabilité.</p>
         <div class="service-link motors-link">Estimer maintenant <span>→</span></div>
       </div>
@@ -145,65 +145,49 @@
       </div>
     </article>
 
-    <!-- SERVICE 02: Polissage (inversé) -->
-    <article class="service-panel service-panel--reverse reveal" onclick="location.href='polissage.html'">
+    <!-- SERVICE 02: Rénovation Phare (inversé) -->
+    <article class="service-panel service-panel--reverse reveal" onclick="location.href='phare.html'">
       <div class="service-panel-image">
-        <img src="/pollisage.png" loading="lazy" alt="Polissage" />
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=2070" loading="lazy" alt="Rénovation Phare" />
       </div>
       <div class="service-panel-body">
         <span class="service-num">02</span>
         <div class="service-accent-line detail-accent"></div>
-        <h3>Polissage</h3>
-        <p>Correction des micro-rayures et hologrammes. Retrouvez un éclat et une profondeur d'exposition.</p>
-        <div class="service-link detail-link">Découvrir le service <span>→</span></div>
-      </div>
-    </article>
-
-    <!-- SERVICE 03: Céramique -->
-    <article class="service-panel reveal" onclick="location.href='ceramique.html'">
-      <div class="service-panel-image">
-        <img src="/ceramique.png" loading="lazy" alt="Céramique" />
-      </div>
-      <div class="service-panel-body">
-        <span class="service-num">03</span>
-        <div class="service-accent-line detail-accent"></div>
-        <h3>Céramique</h3>
-        <p>Protection carrosserie hydrophobe extrême, résistant aux éléments pendant plusieurs années.</p>
+        <h3>Rénovation Phare</h3>
+        <p>Restauration complète de vos optiques ternis. Retrouvez une visibilité optimale et un rendu neuf.</p>
         <div class="service-link detail-link">Découvrir le service <span>→</span></div>
       </div>
     </article>
   </main>
 
-  <!-- FOOTER -->
+    <!-- FOOTER -->
   <footer>
     <div class="container footer-grid">
       <div class="footer-col">
-        
+        <div class="footer-logos-fusion"><img src="/gp_motors.png" class="footer-logo-img" alt="GP Motors" /><img src="/gp_detail.png" class="footer-logo-img" alt="GP Detail" /></div>
         <p>Votre partenaire automobile de confiance.</p>
-        <p>123 Avenue de l'Automobile, 75000 Paris</p>
+        <p>123 Avenue de l’Automobile, 75000 Paris</p>
         <p>contact@gpfusion.fr | +33 1 23 45 67 89</p>
       </div>
       <div class="footer-col">
-        
+        <img src="/gp_motors.png" class="footer-logo-img" alt="GP Motors" />
         <ul class="footer-links">
-          <li><a href="achat.html">Achat Véhicules</a></li>
+          <li><a href="achat.html">Vente Véhicules</a></li>
+          <li><a href="vente.html">Reprise</a></li>
           <li><a href="location.html">Location</a></li>
-          <li><a href="vente.html">Dépôt Vente</a></li>
           <li><a href="diagnostic.html">Diagnostic</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        
+        <img src="/gp_detail.png" class="footer-logo-img" alt="GP Detail" />
         <ul class="footer-links">
-          <li><a href="nettoyage.html">Nettoyage complet</a></li>
-          <li><a href="polissage.html">Polissage & Lustrage</a></li>
-          <li><a href="ceramique.html">Protection Céramique</a></li>
+          <li><a href="nettoyage.html">Nettoyage</a></li>
+          <li><a href="phare.html">Rénovation Phare</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      &copy; 2026 GP Fusion. Tous droits réservés.
-    </div>
+    <div class="footer-bottom">&copy; 2026 GP Fusion. Tous droits réservés.</div>
   </footer>
 
   <script type="module" src="/src/main.js"></script>
