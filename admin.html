@@ -345,6 +345,23 @@
           <div class="photos-grid" id="new-photos-preview"></div>
         </div>
 
+        <!-- Catégorie -->
+        <div class="form-section">
+          <div class="form-section-title">Catégorie</div>
+          <div class="form-grid cols-2">
+            <div class="form-group"><label>Type d'annonce *</label>
+              <select id="f-categorie" onchange="toggleLocationFields()">
+                <option value="vente">Vente</option>
+                <option value="location">Location</option>
+              </select>
+            </div>
+            <div class="form-group" id="prix-jour-group" style="display:none;">
+              <label>Prix / jour (€)</label>
+              <input id="f-prix_jour" type="number" min="0" placeholder="Ex : 80" />
+            </div>
+          </div>
+        </div>
+
         <!-- Visibilité -->
         <div class="form-section">
           <div class="form-section-title">Visibilité</div>
@@ -364,6 +381,12 @@
     </div>
   </div>
 
+  <script>
+    function toggleLocationFields() {
+      const cat = document.getElementById('f-categorie').value;
+      document.getElementById('prix-jour-group').style.display = cat === 'location' ? 'block' : 'none';
+    }
+  </script>
   <script type="module" src="/src/admin.js"></script>
 </body>
 </html>

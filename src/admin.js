@@ -154,7 +154,7 @@ function fillForm(v) {
   const fields = [
     'marque','modele','annee','prix','kilometrage','energie','boite',
     'nb_portes','nb_places','date_mec','type_vehicule','couleur',
-    'puissance_fiscale','puissance_din','description'
+    'puissance_fiscale','puissance_din','description','prix_jour'
   ]
   fields.forEach(f => {
     const el = document.getElementById('f-' + f)
@@ -164,6 +164,8 @@ function fillForm(v) {
   if (permisEl) permisEl.value = v.permis === false ? 'false' : 'true'
   const actifEl = document.getElementById('f-actif')
   if (actifEl) actifEl.checked = v.actif !== false
+  const catEl = document.getElementById('f-categorie')
+  if (catEl) { catEl.value = v.categorie || 'vente'; window.toggleLocationFields() }
 }
 
 function resetForm() {
@@ -242,6 +244,8 @@ document.getElementById('vehicle-form').addEventListener('submit', async e => {
     description:       get('f-description'),
     permis:            document.getElementById('f-permis').value !== 'false',
     actif:             document.getElementById('f-actif').checked,
+    categorie:         get('f-categorie') || 'vente',
+    prix_jour:         get('f-prix_jour') ? parseInt(get('f-prix_jour')) : null,
   }
 
   let vehicleId

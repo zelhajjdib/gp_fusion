@@ -49,11 +49,8 @@
 
   <section class="grid-section">
     <div class="container">
-      <div style="text-align:center;padding:80px 20px;">
-        <p style="font-size:3rem;margin-bottom:24px;opacity:0.2;">—</p>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:rgba(255,255,255,0.4);font-weight:400;margin-bottom:12px;">Aucun véhicule disponible</h2>
-        <p style="color:rgba(255,255,255,0.3);font-size:0.95rem;">Notre flotte de location sera bientôt disponible.<br>Contactez-nous pour toute demande spécifique.</p>
-        <a href="contact.html" class="btn" style="margin-top:32px;display:inline-block;">Nous contacter</a>
+      <div id="location-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:32px;padding:60px 0 80px;">
+        <div style="grid-column:1/-1;text-align:center;padding:60px 0;color:rgba(255,255,255,0.3);">Chargement…</div>
       </div>
     </div>
   </section>
@@ -89,5 +86,55 @@
   </footer>
 
   <script type="module" src="/src/main.js"></script>
+  <script type="module">
+    import { supabase } from '/src/supabase.js'
+
+    const grid = document.getElementById('location-grid')
+
+    const { data, error } = await supabase
+      .from('vehicules')
+      .select('*, photos(url_photo, ordre)')
+      .eq('actif', true)
+      .eq('categorie', 'location')
+      .order('date_publication', { ascending: false })
+
+    if (error || !data || data.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1;text-align:center;padding:80px 20px;">
+          <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:rgba(255,255,255,0.4);font-weight:400;margin-bottom:12px;">Aucun véhicule disponible</h2>
+          <p style="color:rgba(255,255,255,0.3);font-size:0.95rem;">Notre flotte de location sera bientôt disponible.<br>Contactez-nous pour toute demande spécifique.</p>
+          <a href="contact.html" class="btn" style="margin-top:32px;display:inline-block;">Nous contacter</a>
+        </div>`
+      return
+    }
+
+    grid.innerHTML = data.map(v => {
+      const photos = (v.photos || []).sort((a, b) => a.ordre - b.ordre)
+      const img = photos.length ? photos[0].url_photo : '/location.jpg'
+      return `
+        <div style="background:#0d0d0d;border:1px solid rgba(255,255,255,0.07);overflow:hidden;">
+          <div style="position:relative;height:220px;overflow:hidden;">
+            <img src="${img}" alt="${v.marque} ${v.modele}"
+              style="width:100%;height:100%;object-fit:cover;object-position:center 65%;" />
+          </div>
+          <div style="padding:24px;">
+            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.35);margin-bottom:8px;">${v.type_vehicule || 'Véhicule'}</div>
+            <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:2px;font-weight:400;margin-bottom:16px;">${v.marque} ${v.modele}</h3>
+            <div style="display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.energie}</span>
+              <span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.boite}</span>
+              ${v.nb_places ? `<span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.nb_places} places</span>` : ''}
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;">
+              <div>
+                <span style="font-size:1.6rem;font-weight:700;color:#e60000;">${v.prix_jour ? v.prix_jour + ' €' : '—'}</span>
+                <span style="font-size:0.8rem;color:rgba(255,255,255,0.35);"> / jour</span>
+              </div>
+              <a href="contact.html" style="background:#e60000;color:#fff;text-decoration:none;padding:10px 20px;font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;">Réserver →</a>
+            </div>
+          </div>
+        </div>`
+    }).join('')
+  </script>
 </body>
 </html>

@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     .from('vehicules')
     .select('*, photos(url_photo, ordre)')
     .eq('actif', true)
+    .neq('categorie', 'location')
     .order('date_publication', { ascending: false })
 
   if (error || !vehicles) {
