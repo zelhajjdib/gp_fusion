@@ -203,48 +203,46 @@
         <!-- Formulaire -->
         <div class="diag-form-box">
           <h2>Prendre rendez-vous</h2>
-          <form id="diag-form" onsubmit="event.preventDefault(); alert('Demande de rendez-vous envoyée avec succès ! Notre équipe vous contactera sous 24h.'); this.reset();">
-            
+          <form id="diag-form">
+
             <div class="form-row">
               <div class="form-group">
                 <label>Nom complet</label>
-                <input type="text" class="diag-input" placeholder="Ex: Jean Dupont" required />
+                <input type="text" name="nom" class="diag-input" placeholder="Ex: Jean Dupont" required />
               </div>
               <div class="form-group">
                 <label>Téléphone</label>
-                <input type="tel" class="diag-input" placeholder="Ex: 06 12 34 56 78" required />
+                <input type="tel" name="telephone" class="diag-input" placeholder="Ex: 06 12 34 56 78" required />
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group full">
                 <label>Adresse Email</label>
-                <input type="email" class="diag-input" placeholder="Ex: email@domaine.com" required />
+                <input type="email" name="email_client" class="diag-input" placeholder="Ex: email@domaine.com" required />
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group">
                 <label>Marque et Modèle du véhicule</label>
-                <input type="text" class="diag-input" placeholder="Ex: Audi A3" required />
+                <input type="text" name="vehicule" class="diag-input" placeholder="Ex: Audi A3" required />
               </div>
               <div class="form-group">
                 <label>Année / Kilométrage</label>
-                <input type="text" class="diag-input" placeholder="Ex: 2018 - 85000 km" required />
+                <input type="text" name="annee_km" class="diag-input" placeholder="Ex: 2018 - 85000 km" required />
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group full">
-                <label>Motif du diagnostic</label>
-                <select class="diag-select" required>
-                  <option value="" disabled selected>Sélectionnez un motif</option>
-                  <option value="Voyant allumé au tableau de bord">Voyant allumé au tableau de bord</option>
-                  <option value="Bruit anormal (Moteur, train roulant...)">Bruit anormal (Moteur, train roulant...)</option>
-                  <option value="Problème de puissance / Ratés moteur">Problème de puissance / Ratés moteur</option>
-                  <option value="Problème électronique / Inforadiateur">Problème électronique / Multimédia</option>
-                  <option value="Révision complète informatisée">Révision complète et check-up</option>
-                  <option value="Autre">Autre (Précisez en description)</option>
+                <label>Formule souhaitée</label>
+                <select name="formule" class="diag-select" required>
+                  <option value="" disabled selected>Sélectionnez une formule</option>
+                  <option value="Lecture des codes défauts — 20€">Lecture des codes défauts — 20€</option>
+                  <option value="Lecture + effacement des défauts — 30€">Lecture + effacement des défauts — 30€</option>
+                  <option value="Diagnostic complet — 40€">Diagnostic complet — 40€</option>
+                  <option value="Régénération du filtre à particules — 50€">Régénération du filtre à particules — 50€</option>
                 </select>
               </div>
             </div>
@@ -252,18 +250,18 @@
             <div class="form-row">
               <div class="form-group full">
                 <label>Date et heure souhaitées</label>
-                <input type="datetime-local" class="diag-input" required />
+                <input type="datetime-local" name="date_rdv" class="diag-input" required />
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group full">
                 <label>Description détaillée (Symptômes constatés)</label>
-                <textarea class="diag-textarea" placeholder="Décrivez les anomalies que vous avez remarquées..." required></textarea>
+                <textarea name="description" class="diag-textarea" placeholder="Décrivez les anomalies que vous avez remarquées..." required></textarea>
               </div>
             </div>
 
-            <button type="submit" class="btn diag-btn">Confirmer la demande</button>
+            <button type="submit" id="diag-submit" class="btn diag-btn">Confirmer la demande</button>
           </form>
         </div>
 
@@ -359,5 +357,30 @@
   </footer>
 
   <script type="module" src="/src/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init('NFl2F9R0Q-ds-n5wW')
+
+    document.getElementById('diag-form').addEventListener('submit', function(e) {
+      e.preventDefault()
+      const btn = document.getElementById('diag-submit')
+      btn.textContent = 'Envoi en cours…'
+      btn.disabled = true
+
+      emailjs.sendForm('service_m86au0l', 'template_0zjtcoj', this)
+        .then(() => {
+          document.querySelector('.diag-form-box').innerHTML = `
+            <div style="text-align:center;padding:60px 20px;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:3px;color:#e60000;margin-bottom:16px;">Demande envoyée !</div>
+              <p style="color:rgba(255,255,255,0.55);font-size:1rem;line-height:1.7;">Notre équipe vous contactera sous 24h pour confirmer votre rendez-vous.</p>
+            </div>`
+        })
+        .catch(() => {
+          btn.textContent = 'Confirmer la demande'
+          btn.disabled = false
+          alert('Erreur lors de l\'envoi. Appelez-nous au 07 58 35 74 33.')
+        })
+    })
+  </script>
 </body>
 </html>
