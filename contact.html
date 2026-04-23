@@ -119,11 +119,11 @@
 
           <form id="contactForm" style="display:grid;gap:14px;">
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-              <input type="text" placeholder="Votre nom" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#0066ff'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
-              <input type="tel" placeholder="Téléphone" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#0066ff'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+              <input name="nom" type="text" placeholder="Votre nom" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#0066ff'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+              <input name="telephone" type="tel" placeholder="Téléphone" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#0066ff'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
             </div>
-            <input type="email" placeholder="Adresse email" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#0066ff'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
-            <select required style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#0066ff'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <input name="email_client" type="email" placeholder="Adresse email" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#0066ff'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+            <select name="objet" required style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#0066ff'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
               <option value="">Objet de la demande</option>
               <optgroup label="GP Motors">
                 <option>Vente d'un véhicule</option>
@@ -137,8 +137,8 @@
               </optgroup>
               <option>Autre demande</option>
             </select>
-            <textarea placeholder="Votre message" rows="5" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#0066ff'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"></textarea>
-            <button type="submit" style="background:#0066ff;color:#fff;border:none;padding:17px 40px;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15em;cursor:pointer;transition:opacity 0.2s;width:fit-content;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
+            <textarea name="message" placeholder="Votre message" rows="5" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#0066ff'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"></textarea>
+            <button type="submit" id="contact-submit" style="background:#0066ff;color:#fff;border:none;padding:17px 40px;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15em;cursor:pointer;transition:opacity 0.2s;width:fit-content;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
               Envoyer le message →
             </button>
           </form>
@@ -180,11 +180,30 @@
   </footer>
 
   <script type="module" src="/src/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
+    emailjs.init('NFl2F9R0Q-ds-n5wW')
+
     document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      this.innerHTML = '<div style="padding:40px 0;text-align:center;"><div style="font-family:\'Bebas Neue\',sans-serif;font-size:2.5rem;letter-spacing:3px;color:#0066ff;margin-bottom:16px;">Message envoyé !</div><p style="color:rgba(255,255,255,0.55);font-size:1rem;">Notre équipe vous répondra dans les plus brefs délais.</p></div>';
-    });
+      e.preventDefault()
+      const btn = document.getElementById('contact-submit')
+      btn.textContent = 'Envoi en cours…'
+      btn.disabled = true
+
+      emailjs.sendForm('service_m86au0l', 'template_atdh6bn', this)
+        .then(() => {
+          this.innerHTML = `
+            <div style="padding:40px 0;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:3px;color:#0066ff;margin-bottom:16px;">Message envoyé !</div>
+              <p style="color:rgba(255,255,255,0.55);font-size:1rem;">Notre équipe vous répondra dans les plus brefs délais.</p>
+            </div>`
+        })
+        .catch(() => {
+          btn.textContent = 'Envoyer le message →'
+          btn.disabled = false
+          alert('Erreur lors de l\'envoi. Appelez-nous au 07 58 35 74 33.')
+        })
+    })
   </script>
 </body>
 </html>
