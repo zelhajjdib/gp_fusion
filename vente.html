@@ -83,14 +83,14 @@
         <form id="repriseFormEl" style="display:grid;gap:14px;">
           <!-- Ligne 1 -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-            <input type="text" placeholder="Marque" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
-            <input type="text" placeholder="Modèle" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+            <input name="marque" type="text" placeholder="Marque" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+            <input name="modele" type="text" placeholder="Modèle" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
           </div>
           <!-- Ligne 2 -->
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
-            <input type="number" placeholder="Année" min="1990" max="2025" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
-            <input type="number" placeholder="Kilométrage" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
-            <select required style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <input name="annee" type="number" placeholder="Année" min="1990" max="2025" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+            <input name="kilometrage" type="number" placeholder="Kilométrage" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+            <select name="carburant" required style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
               <option value="">Carburant</option>
               <option>Essence</option>
               <option>Diesel</option>
@@ -100,12 +100,12 @@
           </div>
           <!-- Ligne 3 -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-            <select required style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <select name="boite" required style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
               <option value="">Boîte de vitesses</option>
               <option>Manuelle</option>
               <option>Automatique</option>
             </select>
-            <select required style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+            <select name="etat" required style="background:#0a0a0a;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
               <option value="">État général</option>
               <option>Excellent</option>
               <option>Très bon</option>
@@ -114,20 +114,20 @@
             </select>
           </div>
           <!-- Prix souhaité -->
-          <input type="number" placeholder="Prix souhaité (€)" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+          <input name="prix" type="number" placeholder="Prix souhaité (€)" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
           <!-- Description -->
-          <textarea placeholder="Description & options notables (optionnel)" rows="3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"></textarea>
+          <textarea name="description" placeholder="Description & options notables (optionnel)" rows="3" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'"></textarea>
 
           <div style="height:1px;background:rgba(255,255,255,0.06);margin:10px 0;"></div>
 
           <!-- Contact -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-            <input type="text" placeholder="Votre nom" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
-            <input type="tel" placeholder="Téléphone" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+            <input name="nom" type="text" placeholder="Votre nom" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+            <input name="telephone" type="tel" placeholder="Téléphone" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
           </div>
-          <input type="email" placeholder="Adresse email" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
+          <input name="email_client" type="email" placeholder="Adresse email" required style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff;padding:14px 18px;font-size:0.95rem;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#e60000'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" />
 
-          <button type="submit" style="margin-top:10px;background:#e60000;color:#fff;border:none;padding:17px 40px;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15em;cursor:pointer;transition:opacity 0.2s;width:fit-content;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
+          <button type="submit" id="repriseSubmitBtn" style="margin-top:10px;background:#e60000;color:#fff;border:none;padding:17px 40px;font-family:'Outfit',sans-serif;font-weight:700;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.15em;cursor:pointer;transition:opacity 0.2s;width:fit-content;" onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
             Envoyer ma demande →
           </button>
         </form>
@@ -168,11 +168,26 @@
     <div class="footer-bottom">&copy; 2026 GP Fusion. Tous droits réservés.</div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="module" src="/src/main.js"></script>
   <script>
+    emailjs.init('NFl2F9R0Q-ds-n5wW');
+
     document.getElementById('repriseFormEl').addEventListener('submit', function(e) {
       e.preventDefault();
-      this.innerHTML = '<div style="padding:40px 0;text-align:center;"><div style="font-family:\'Bebas Neue\',sans-serif;font-size:2.5rem;letter-spacing:3px;color:#e60000;margin-bottom:16px;">Demande envoyée !</div><p style="color:rgba(255,255,255,0.55);font-size:1rem;">Notre équipe vous contactera dans les 24h pour confirmer votre estimation.</p></div>';
+      const btn = document.getElementById('repriseSubmitBtn');
+      btn.textContent = 'Envoi en cours…';
+      btn.disabled = true;
+
+      emailjs.sendForm('service_m86au0l', 'template_nixyzxo', this)
+        .then(() => {
+          this.innerHTML = '<div style="padding:40px 0;text-align:center;"><div style="font-family:\'Bebas Neue\',sans-serif;font-size:2.5rem;letter-spacing:3px;color:#e60000;margin-bottom:16px;">Demande envoyée !</div><p style="color:rgba(255,255,255,0.55);font-size:1rem;">Notre équipe vous contactera dans les 24h pour confirmer votre estimation.</p></div>';
+        })
+        .catch(() => {
+          btn.textContent = 'Envoyer ma demande →';
+          btn.disabled = false;
+          alert('Erreur lors de l\'envoi. Veuillez réessayer ou nous appeler au 07 58 35 74 33.');
+        });
     });
   </script>
 </body>
