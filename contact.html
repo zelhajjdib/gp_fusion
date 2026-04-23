@@ -7,6 +7,18 @@
   <meta name="description" content="Contactez GP Fusion pour toute demande concernant nos services automobiles GP Motors ou esthétiques GP Detail." />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <link rel="stylesheet" href="/src/style.css" />
+  <style>
+    @media (max-width: 600px) {
+      /* Layout info + formulaire en colonne */
+      section > div[style*="grid-template-columns: 1fr 1.6fr"] {
+        grid-template-columns: 1fr !important;
+      }
+      /* Champs côte à côte en colonne */
+      form > div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
 </head>
 <body style="background-color: #050505; color: #fff;">
 

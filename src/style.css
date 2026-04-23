@@ -866,3 +866,10 @@ footer {
   .menu-toggle { display: block; }
   .hero-content h1 { font-size: 2.5rem; }
 }
+
+/* Mobile navbar */
+@media (max-width: 600px) {
+  .nav-tagline { display: none; }
+  .logo-img { height: 48px; }
+  .nav-overlay-inner { width: 100vw; }
+}
