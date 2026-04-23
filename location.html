@@ -7,6 +7,42 @@
   <meta name="description" content="Louez des véhicules d'exception avec GP Motors. Des prix attractifs, une qualité de service premium pour votre location courte ou longue durée." />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <link rel="stylesheet" href="/src/style.css" />
+  <style>
+    #resa-modal {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85); z-index: 200;
+      align-items: center; justify-content: center;
+      padding: 20px; overflow-y: auto;
+    }
+    .resa-box {
+      background: #0d0d0d; border: 1px solid rgba(255,255,255,0.1);
+      width: 100%; max-width: 520px; padding: 36px; position: relative;
+    }
+    .resa-box h2 { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:3px; font-weight:400; margin-bottom:6px; }
+    .resa-box .resa-sub { color:rgba(255,255,255,0.35); font-size:0.85rem; margin-bottom:28px; }
+    .resa-box input, .resa-box textarea {
+      width:100%; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1);
+      color:#fff; padding:13px 16px; font-size:0.9rem; font-family:'Outfit',sans-serif;
+      outline:none; margin-bottom:12px;
+    }
+    .resa-box input:focus, .resa-box textarea:focus { border-color:#e60000; }
+    .resa-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .resa-box textarea { resize:vertical; min-height:80px; }
+    .resa-btn {
+      width:100%; background:#e60000; color:#fff; border:none;
+      padding:15px; font-weight:700; font-size:0.85rem;
+      text-transform:uppercase; letter-spacing:0.15em; cursor:pointer; margin-top:4px;
+    }
+    .resa-btn:hover { opacity:0.85; }
+    .resa-btn:disabled { opacity:0.5; cursor:not-allowed; }
+    .resa-close {
+      position:absolute; top:16px; right:16px;
+      background:none; border:none; color:rgba(255,255,255,0.4);
+      font-size:1.4rem; cursor:pointer; line-height:1;
+    }
+    .resa-close:hover { color:#fff; }
+    @media(max-width:500px) { .resa-grid { grid-template-columns:1fr; } }
+  </style>
 </head>
 <body style="background-color: #050505; color: #fff;">
       <!-- HEADER -->
@@ -55,6 +91,30 @@
     </div>
   </section>
 
+  <!-- MODAL RÉSERVATION -->
+  <div id="resa-modal">
+    <div class="resa-box">
+      <button class="resa-close" id="resa-close">✕</button>
+      <h2>Réserver</h2>
+      <p class="resa-sub" id="resa-vehicule-label"></p>
+      <form id="resa-form">
+        <input type="hidden" name="vehicule" id="resa-vehicule" />
+        <input type="hidden" name="prix_jour" id="resa-prix" />
+        <div class="resa-grid">
+          <input name="nom"        type="text"  placeholder="Votre nom *"   required />
+          <input name="telephone"  type="tel"   placeholder="Téléphone *"   required />
+        </div>
+        <input name="email_client" type="email" placeholder="Adresse email *" required />
+        <div class="resa-grid">
+          <input name="date_debut" type="date"   required />
+          <input name="nb_jours"   type="number" placeholder="Nombre de jours *" min="1" required />
+        </div>
+        <textarea name="message" placeholder="Questions ou informations complémentaires…"></textarea>
+        <button type="submit" class="resa-btn" id="resa-submit">Envoyer la demande →</button>
+      </form>
+    </div>
+  </div>
+
       <!-- FOOTER -->
   <footer>
     <div class="container footer-grid">
@@ -89,52 +149,103 @@
   <script type="module">
     import { supabase } from '/src/supabase.js'
 
-    const grid = document.getElementById('location-grid')
+    const EMPTY = `
+      <div style="grid-column:1/-1;text-align:center;padding:80px 20px;">
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:rgba(255,255,255,0.4);font-weight:400;margin-bottom:12px;">Aucun véhicule disponible</h2>
+        <p style="color:rgba(255,255,255,0.3);font-size:0.95rem;">Notre flotte de location sera bientôt disponible.<br>Contactez-nous pour toute demande spécifique.</p>
+        <a href="contact.html" class="btn" style="margin-top:32px;display:inline-block;">Nous contacter</a>
+      </div>`
 
-    const { data, error } = await supabase
-      .from('vehicules')
-      .select('*, photos(url_photo, ordre)')
-      .eq('actif', true)
-      .eq('categorie', 'location')
-      .order('date_publication', { ascending: false })
+    async function loadLocation() {
+      const grid = document.getElementById('location-grid')
+      const { data, error } = await supabase
+        .from('vehicules')
+        .select('*, photos(url_photo, ordre)')
+        .eq('actif', true)
+        .eq('categorie', 'location')
+        .order('date_publication', { ascending: false })
 
-    if (error || !data || data.length === 0) {
-      grid.innerHTML = `
-        <div style="grid-column:1/-1;text-align:center;padding:80px 20px;">
-          <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:rgba(255,255,255,0.4);font-weight:400;margin-bottom:12px;">Aucun véhicule disponible</h2>
-          <p style="color:rgba(255,255,255,0.3);font-size:0.95rem;">Notre flotte de location sera bientôt disponible.<br>Contactez-nous pour toute demande spécifique.</p>
-          <a href="contact.html" class="btn" style="margin-top:32px;display:inline-block;">Nous contacter</a>
-        </div>`
-      return
+      if (error || !data || data.length === 0) {
+        grid.innerHTML = EMPTY
+        return
+      }
+
+      grid.innerHTML = data.map(v => {
+        const photos = (v.photos || []).sort((a, b) => a.ordre - b.ordre)
+        const img = photos.length ? photos[0].url_photo : '/location.jpg'
+        return `
+          <div style="background:#0d0d0d;border:1px solid rgba(255,255,255,0.07);overflow:hidden;">
+            <div style="height:220px;overflow:hidden;">
+              <img src="${img}" alt="${v.marque} ${v.modele}"
+                style="width:100%;height:100%;object-fit:cover;object-position:center 65%;" />
+            </div>
+            <div style="padding:24px;">
+              <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.35);margin-bottom:8px;">${v.type_vehicule || 'Véhicule'}</div>
+              <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:2px;font-weight:400;margin-bottom:16px;">${v.marque} ${v.modele}</h3>
+              <div style="display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
+                <span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.energie}</span>
+                <span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.boite}</span>
+                ${v.nb_places ? `<span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.nb_places} places</span>` : ''}
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;">
+                <div>
+                  <span style="font-size:1.6rem;font-weight:700;color:#e60000;">${v.prix_jour ? v.prix_jour + ' €' : '—'}</span>
+                  <span style="font-size:0.8rem;color:rgba(255,255,255,0.35);"> / jour</span>
+                </div>
+                <button onclick="openResa('${v.marque} ${v.modele}','${v.prix_jour || '—'}')" style="background:#e60000;color:#fff;border:none;padding:10px 20px;font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;">Réserver →</button>
+              </div>
+            </div>
+          </div>`
+      }).join('')
     }
 
-    grid.innerHTML = data.map(v => {
-      const photos = (v.photos || []).sort((a, b) => a.ordre - b.ordre)
-      const img = photos.length ? photos[0].url_photo : '/location.jpg'
-      return `
-        <div style="background:#0d0d0d;border:1px solid rgba(255,255,255,0.07);overflow:hidden;">
-          <div style="position:relative;height:220px;overflow:hidden;">
-            <img src="${img}" alt="${v.marque} ${v.modele}"
-              style="width:100%;height:100%;object-fit:cover;object-position:center 65%;" />
-          </div>
-          <div style="padding:24px;">
-            <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.35);margin-bottom:8px;">${v.type_vehicule || 'Véhicule'}</div>
-            <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:2px;font-weight:400;margin-bottom:16px;">${v.marque} ${v.modele}</h3>
-            <div style="display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap;">
-              <span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.energie}</span>
-              <span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.boite}</span>
-              ${v.nb_places ? `<span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.nb_places} places</span>` : ''}
-            </div>
-            <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;">
-              <div>
-                <span style="font-size:1.6rem;font-weight:700;color:#e60000;">${v.prix_jour ? v.prix_jour + ' €' : '—'}</span>
-                <span style="font-size:0.8rem;color:rgba(255,255,255,0.35);"> / jour</span>
-              </div>
-              <a href="contact.html" style="background:#e60000;color:#fff;text-decoration:none;padding:10px 20px;font-weight:700;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;">Réserver →</a>
-            </div>
-          </div>
-        </div>`
-    }).join('')
+    document.addEventListener('DOMContentLoaded', loadLocation)
+
+    // Réservation modal
+    window.openResa = (vehicule, prix) => {
+      document.getElementById('resa-vehicule').value = vehicule
+      document.getElementById('resa-prix').value = prix + ' € / jour'
+      document.getElementById('resa-vehicule-label').textContent = vehicule + ' — ' + prix + ' € / jour'
+      document.getElementById('resa-form').reset()
+      document.getElementById('resa-vehicule').value = vehicule
+      document.getElementById('resa-prix').value = prix + ' € / jour'
+      document.getElementById('resa-modal').style.display = 'flex'
+    }
+
+    document.getElementById('resa-close').addEventListener('click', () => {
+      document.getElementById('resa-modal').style.display = 'none'
+    })
+    document.getElementById('resa-modal').addEventListener('click', e => {
+      if (e.target === document.getElementById('resa-modal'))
+        document.getElementById('resa-modal').style.display = 'none'
+    })
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init('NFl2F9R0Q-ds-n5wW')
+
+    document.getElementById('resa-form').addEventListener('submit', function(e) {
+      e.preventDefault()
+      const btn = document.getElementById('resa-submit')
+      btn.textContent = 'Envoi en cours…'
+      btn.disabled = true
+
+      emailjs.sendForm('service_m86au0l', 'template_051y6u8', this)
+        .then(() => {
+          document.querySelector('.resa-box').innerHTML = `
+            <div style="text-align:center;padding:40px 0;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:3px;color:#e60000;margin-bottom:16px;">Demande envoyée !</div>
+              <p style="color:rgba(255,255,255,0.55);font-size:1rem;">Notre équipe vous contactera rapidement pour confirmer votre réservation.</p>
+              <button onclick="document.getElementById('resa-modal').style.display='none'" style="margin-top:24px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:#fff;padding:10px 24px;cursor:pointer;">Fermer</button>
+            </div>`
+        })
+        .catch(() => {
+          btn.textContent = 'Envoyer la demande →'
+          btn.disabled = false
+          alert('Erreur lors de l\'envoi. Appelez-nous au 07 58 35 74 33.')
+        })
+    })
   </script>
 </body>
 </html>
