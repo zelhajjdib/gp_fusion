@@ -68,27 +68,6 @@
       </div>
     </section>
 
-    <!-- ===== STATS ===== -->
-    <div class="sp-stats">
-      <div class="sp-stats__grid sp-wrap">
-        <div class="sp-stat">
-          <span class="sp-stat__val">1000+</span>
-          <span class="sp-stat__lbl">Phares rénovés</span>
-        </div>
-        <div class="sp-stat">
-          <span class="sp-stat__val">4.9/5</span>
-          <span class="sp-stat__lbl">Note client</span>
-        </div>
-        <div class="sp-stat">
-          <span class="sp-stat__val">2H</span>
-          <span class="sp-stat__lbl">Délai maximum</span>
-        </div>
-        <div class="sp-stat">
-          <span class="sp-stat__val">100%</span>
-          <span class="sp-stat__lbl">Résultat garanti</span>
-        </div>
-      </div>
-    </div>
 
     <!-- ===== AVANT / APRÈS ===== -->
     <section class="sp-ba">
@@ -142,7 +121,6 @@
           <div class="sp-card">
             <div class="sp-card__head">
               <div class="sp-card__name">Formule Standard</div>
-              <div class="sp-card__dur">1H</div>
             </div>
             <p class="sp-card__desc">Léger ponçage et polissage machine professionnel pour un résultat propre et plus clair.</p>
             <ul class="sp-card__list">
@@ -161,7 +139,6 @@
             <div class="sp-card__badge">RECOMMANDÉ</div>
             <div class="sp-card__head">
               <div class="sp-card__name">Formule Premium</div>
-              <div class="sp-card__dur">1H30</div>
             </div>
             <p class="sp-card__desc">Ponçage complet, résultat durable avec vernis protecteur et polish professionnel.</p>
             <ul class="sp-card__list">
@@ -210,13 +187,11 @@
         <div class="sp-panel is-active" id="panel1">
           <p class="sp-panel-q">Quelle prestation souhaitez-vous ?</p>
           <div class="sp-tiles">
-            <div class="sp-tile" data-service="Formule Standard">
-              <div class="sp-tile__dur">1H</div>
+            <div class="sp-tile" data-service="Formule Standard — 50€">
               <div class="sp-tile__name">Formule Standard</div>
               <div class="sp-tile__price">50€</div>
             </div>
-            <div class="sp-tile is-sel" data-service="Formule Premium">
-              <div class="sp-tile__dur">1H30</div>
+            <div class="sp-tile is-sel" data-service="Formule Premium — 80€">
               <div class="sp-tile__name">Formule Premium</div>
               <div class="sp-tile__price">80€</div>
             </div>
@@ -231,13 +206,9 @@
           <p class="sp-panel-q">Choisissez une date et un horaire</p>
           <input type="date" class="sp-date" id="rdvDate" />
           <div class="sp-times">
-            <div class="sp-slot">8h00</div>
-            <div class="sp-slot">9h30</div>
-            <div class="sp-slot">11h00</div>
-            <div class="sp-slot is-sel">13h00</div>
-            <div class="sp-slot">14h30</div>
+            <div class="sp-slot is-sel">10h00</div>
+            <div class="sp-slot">14h00</div>
             <div class="sp-slot">16h00</div>
-            <div class="sp-slot">17h30</div>
           </div>
           <div class="sp-nav-btns">
             <button class="sp-btn sp-btn--outline sp-prev" data-to="1">← Retour</button>
@@ -249,14 +220,14 @@
         <div class="sp-panel" id="panel3">
           <p class="sp-panel-q">Vos coordonnées</p>
           <div class="sp-form">
-            <input type="text" class="sp-input" placeholder="Votre nom" />
-            <input type="tel" class="sp-input" placeholder="Votre téléphone" />
-            <input type="text" class="sp-input" placeholder="Marque & modèle du véhicule" />
-            <textarea class="sp-input sp-textarea" placeholder="Informations complémentaires..."></textarea>
+            <input type="text" id="rdv-nom" class="sp-input" placeholder="Votre nom" />
+            <input type="tel" id="rdv-tel" class="sp-input" placeholder="Votre téléphone" />
+            <input type="text" id="rdv-vehicule" class="sp-input" placeholder="Marque & modèle du véhicule" />
+            <textarea id="rdv-message" class="sp-input sp-textarea" placeholder="Informations complémentaires..."></textarea>
           </div>
           <div class="sp-nav-btns" style="margin-top:20px;">
             <button class="sp-btn sp-btn--outline sp-prev" data-to="2">← Retour</button>
-            <button class="sp-btn sp-btn--solid">Confirmer la réservation →</button>
+            <button class="sp-btn sp-btn--solid" id="rdv-submit">Confirmer la réservation →</button>
           </div>
         </div>
 
@@ -382,6 +353,49 @@
       dateInput.min = today;
       dateInput.value = today;
     }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init('NFl2F9R0Q-ds-n5wW')
+
+    document.getElementById('rdv-submit').addEventListener('click', function() {
+      const nom      = document.getElementById('rdv-nom').value.trim()
+      const tel      = document.getElementById('rdv-tel').value.trim()
+      const vehicule = document.getElementById('rdv-vehicule').value.trim()
+      const message  = document.getElementById('rdv-message').value.trim()
+
+      if (!nom || !tel || !vehicule) {
+        alert('Merci de remplir votre nom, téléphone et véhicule.')
+        return
+      }
+
+      const selTile   = document.querySelector('.sp-tile.is-sel')
+      const service   = selTile ? selTile.dataset.service : '—'
+      const date_rdv  = document.getElementById('rdvDate').value || '—'
+      const selSlot   = document.querySelector('.sp-slot.is-sel')
+      const heure_rdv = selSlot ? selSlot.textContent : '—'
+
+      const btn = this
+      btn.textContent = 'Envoi en cours…'
+      btn.disabled = true
+
+      emailjs.send('service_m86au0l', 'template_iv4rd9b', {
+        nom, telephone: tel, vehicule, service, date_rdv, heure_rdv, message
+      })
+      .then(() => {
+        document.querySelector('.sp-rdv .sp-wrap').innerHTML = `
+          <div style="text-align:center;padding:80px 20px;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:3px;color:#0066ff;margin-bottom:16px;">Réservation envoyée !</div>
+            <p style="color:rgba(255,255,255,0.55);font-size:1rem;line-height:1.7;">Notre équipe vous contactera sous 24h pour confirmer votre créneau.</p>
+          </div>`
+      })
+      .catch(() => {
+        btn.textContent = 'Confirmer la réservation →'
+        btn.disabled = false
+        alert('Erreur lors de l\'envoi. Appelez-nous au 07 58 35 74 33.')
+      })
+    })
   </script>
 </body>
 </html>

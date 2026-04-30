@@ -254,6 +254,13 @@
                 </span>
                 <strong style="color:#fff;">+10€</strong>
               </label>
+              <label style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;">
+                <span style="display:flex;align-items:center;gap:10px;">
+                  <input type="checkbox" class="opt-check" data-price="10" data-label="Prise en charge à domicile (récupération + dépôt)" style="width:16px;height:16px;accent-color:#0066ff;cursor:pointer;" />
+                  <span style="font-size:0.95rem;color:rgba(255,255,255,0.75);">Prise en charge à domicile <span style="font-size:0.8rem;color:rgba(255,255,255,0.4);">(récupération + dépôt · Compiègne uniquement)</span></span>
+                </span>
+                <strong style="color:#fff;">+10€</strong>
+              </label>
             </div>
             <div style="margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;">
               <span style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.4);">Total estimé</span>
@@ -271,13 +278,8 @@
           <p class="sp-panel-q">Choisissez une date et un horaire</p>
           <input type="date" class="sp-date" id="rdvDate" />
           <div class="sp-times">
-            <div class="sp-slot">8h00</div>
-            <div class="sp-slot">9h30</div>
-            <div class="sp-slot">11h00</div>
-            <div class="sp-slot is-sel">13h00</div>
-            <div class="sp-slot">14h30</div>
-            <div class="sp-slot">16h00</div>
-            <div class="sp-slot">17h30</div>
+            <div class="sp-slot is-sel">9h00</div>
+            <div class="sp-slot">14h00</div>
           </div>
           <div class="sp-nav-btns">
             <button class="sp-btn sp-btn--outline sp-prev" data-to="1">← Retour</button>
@@ -460,7 +462,7 @@
       const selTile    = document.querySelector('.sp-tile.is-sel')
       const service    = selTile ? selTile.querySelector('.sp-tile__name').textContent + ' — ' + selTile.querySelector('.sp-tile__price').textContent : '—'
       const optsList   = Array.from(document.querySelectorAll('.opt-check:checked'))
-                           .map(cb => cb.closest('label').querySelector('span span').textContent)
+                           .map(cb => cb.dataset.label || cb.closest('label').querySelector('span span').textContent)
       const options    = optsList.length ? optsList.join(', ') : 'Aucune'
       const total      = document.getElementById('priceTotal').textContent
       const date_rdv   = document.getElementById('rdvDate').value || '—'
@@ -471,7 +473,7 @@
       btn.textContent = 'Envoi en cours…'
       btn.disabled = true
 
-      emailjs.send('service_m86au0l', 'TEMPLATE_ID_NETTOYAGE', {
+      emailjs.send('service_m86au0l', 'template_1h86xmw', {
         nom, telephone: tel, vehicule, service, options, total, date_rdv, heure_rdv, message
       })
       .then(() => {
