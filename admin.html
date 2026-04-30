@@ -360,6 +360,16 @@
               <input id="f-prix_jour" type="number" min="0" placeholder="Ex : 80" />
             </div>
           </div>
+          <div class="form-grid cols-2" id="indispo-group" style="display:none;margin-top:12px;">
+            <div class="form-group">
+              <label>Indisponible du</label>
+              <input id="f-indispo_debut" type="date" />
+            </div>
+            <div class="form-group">
+              <label>Indisponible jusqu'au</label>
+              <input id="f-indispo_fin" type="date" />
+            </div>
+          </div>
         </div>
 
         <!-- Visibilité -->
@@ -384,7 +394,9 @@
   <script>
     function toggleLocationFields() {
       const cat = document.getElementById('f-categorie').value;
-      document.getElementById('prix-jour-group').style.display = cat === 'location' ? 'block' : 'none';
+      const isLoc = cat === 'location';
+      document.getElementById('prix-jour-group').style.display  = isLoc ? 'block' : 'none';
+      document.getElementById('indispo-group').style.display    = isLoc ? 'grid'  : 'none';
     }
   </script>
   <script type="module" src="/src/admin.js"></script>

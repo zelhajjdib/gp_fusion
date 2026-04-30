@@ -111,6 +111,10 @@
         </div>
         <textarea name="message" placeholder="Questions ou informations complémentaires…"></textarea>
         <button type="submit" class="resa-btn" id="resa-submit">Envoyer la demande →</button>
+        <p style="margin-top:14px;font-size:0.75rem;color:rgba(255,255,255,0.3);line-height:1.6;">
+          Un acompte de 20% du montant total sera demandé par email pour confirmer la réservation.<br>
+          Annulation gratuite jusqu'à 48h avant la date de début. Passé ce délai, l'acompte est conservé.
+        </p>
       </form>
     </div>
   </div>
@@ -187,6 +191,10 @@
                 <span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.boite}</span>
                 ${v.nb_places ? `<span style="font-size:0.82rem;color:rgba(255,255,255,0.5);">${v.nb_places} places</span>` : ''}
               </div>
+              ${v.indispo_debut && v.indispo_fin ? `
+              <div style="margin-bottom:14px;padding:8px 12px;background:rgba(230,0,0,0.08);border:1px solid rgba(230,0,0,0.25);font-size:0.78rem;color:#e60000;">
+                Indisponible du ${new Date(v.indispo_debut).toLocaleDateString('fr-FR')} au ${new Date(v.indispo_fin).toLocaleDateString('fr-FR')}
+              </div>` : ''}
               <div style="display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;">
                 <div>
                   <span style="font-size:1.6rem;font-weight:700;color:#e60000;">${v.prix_jour ? v.prix_jour + ' €' : '—'}</span>

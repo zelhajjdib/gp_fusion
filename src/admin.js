@@ -154,7 +154,8 @@ function fillForm(v) {
   const fields = [
     'marque','modele','annee','prix','kilometrage','energie','boite',
     'nb_portes','nb_places','date_mec','type_vehicule','couleur',
-    'puissance_fiscale','puissance_din','description','prix_jour'
+    'puissance_fiscale','puissance_din','description','prix_jour',
+    'indispo_debut','indispo_fin'
   ]
   fields.forEach(f => {
     const el = document.getElementById('f-' + f)
@@ -246,6 +247,8 @@ document.getElementById('vehicle-form').addEventListener('submit', async e => {
     actif:             document.getElementById('f-actif').checked,
     categorie:         get('f-categorie') || 'vente',
     prix_jour:         get('f-prix_jour') ? parseInt(get('f-prix_jour')) : null,
+    indispo_debut:     get('f-indispo_debut') || null,
+    indispo_fin:       get('f-indispo_fin')   || null,
   }
 
   let vehicleId
