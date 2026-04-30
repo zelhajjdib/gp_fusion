@@ -1,4 +1,5 @@
 import { supabase } from './supabase.js'
+import { esc } from './esc.js'
 
 const STORAGE_URL = 'https://fvdzdyjkwrjollhhhxaw.supabase.co/storage/v1/object/public/vehicules/'
 
@@ -71,37 +72,47 @@ async function loadVehicles() {
     const photos = (v.photos || []).sort((a, b) => a.ordre - b.ordre)
     const img    = photos.length ? photos[0].url_photo : '/vente.jpeg'
     return `
-      <tr>
-        <td><img src="${img}" alt="${v.marque} ${v.modele}" /></td>
+      <tr data-id="${esc(v.id)}">
+        <td><img src="${esc(img)}" alt="${esc(v.marque)} ${esc(v.modele)}" /></td>
         <td>
-          <div class="v-name">${v.marque} ${v.modele}</div>
-          <div class="v-sub">${v.annee}</div>
+          <div class="v-name">${esc(v.marque)} ${esc(v.modele)}</div>
+          <div class="v-sub">${esc(v.annee)}</div>
         </td>
-        <td class="v-price">${Number(v.prix).toLocaleString('fr-FR')} €</td>
-        <td class="v-views">${v.nb_vues || 0}</td>
+        <td class="v-price">${esc(Number(v.prix).toLocaleString('fr-FR'))} €</td>
+        <td class="v-views">${esc(v.nb_vues || 0)}</td>
         <td>
           <label class="toggle">
-            <input type="checkbox" ${v.actif ? 'checked' : ''}
-              onchange="toggleActif('${v.id}', this.checked)" />
+            <input type="checkbox" ${v.actif ? 'checked' : ''} class="toggle-actif" />
             <span class="slider"></span>
           </label>
         </td>
         <td>
-          <button class="btn-edit"   onclick="openEdit('${v.id}')">Modifier</button>
-          <button class="btn-delete" onclick="deleteVehicle('${v.id}')">Supprimer</button>
+          <button class="btn-edit"   data-action="edit">Modifier</button>
+          <button class="btn-delete" data-action="delete">Supprimer</button>
         </td>
       </tr>`
   }).join('')
+
+  // Délégation d'événements (remplace les onclick inline)
+  tbody.querySelectorAll('tr[data-id]').forEach(tr => {
+    const id = tr.dataset.id
+    const toggle = tr.querySelector('.toggle-actif')
+    if (toggle) toggle.addEventListener('change', e => toggleActif(id, e.target.checked))
+    const editBtn = tr.querySelector('[data-action="edit"]')
+    if (editBtn) editBtn.addEventListener('click', () => openEdit(id))
+    const delBtn = tr.querySelector('[data-action="delete"]')
+    if (delBtn) delBtn.addEventListener('click', () => deleteVehicle(id))
+  })
 }
 
 // ── TOGGLE ACTIF ─────────────────────────────────────────
-window.toggleActif = async (id, actif) => {
+async function toggleActif(id, actif) {
   await supabase.from('vehicules').update({ actif }).eq('id', id)
   loadVehicles()
 }
 
 // ── DELETE ───────────────────────────────────────────────
-window.deleteVehicle = async (id) => {
+async function deleteVehicle(id) {
   if (!confirm('Supprimer cette annonce définitivement ?')) return
   await supabase.from('photos').delete().eq('vehicule_id', id)
   await supabase.from('vehicules').delete().eq('id', id)
@@ -120,7 +131,7 @@ document.getElementById('btn-add').addEventListener('click', () => {
 })
 
 // ── OPEN EDIT FORM ───────────────────────────────────────
-window.openEdit = async (id) => {
+async function openEdit(id) {
   const { data: v } = await supabase
     .from('vehicules')
     .select('*, photos(id, url_photo, ordre)')
@@ -166,7 +177,7 @@ function fillForm(v) {
   const actifEl = document.getElementById('f-actif')
   if (actifEl) actifEl.checked = v.actif !== false
   const catEl = document.getElementById('f-categorie')
-  if (catEl) { catEl.value = v.categorie || 'vente'; window.toggleLocationFields() }
+  if (catEl) { catEl.value = v.categorie || 'vente'; if (typeof window.toggleLocationFields === 'function') window.toggleLocationFields() }
 }
 
 function resetForm() {
@@ -188,29 +199,33 @@ function renderNewPhotos() {
   const container = document.getElementById('new-photos-preview')
   container.innerHTML = newPhotoFiles.map((f, i) => `
     <div class="photo-thumb">
-      <img src="${URL.createObjectURL(f)}" alt="Nouvelle photo ${i + 1}" />
-      <button type="button" onclick="removeNewPhoto(${i})">×</button>
+      <img src="${esc(URL.createObjectURL(f))}" alt="Nouvelle photo ${i + 1}" />
+      <button type="button" data-action="remove-new" data-i="${i}">×</button>
     </div>`).join('')
-}
 
-window.removeNewPhoto = i => {
-  newPhotoFiles.splice(i, 1)
-  renderNewPhotos()
+  container.querySelectorAll('[data-action="remove-new"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      newPhotoFiles.splice(parseInt(btn.dataset.i), 1)
+      renderNewPhotos()
+    })
+  })
 }
 
 function renderExistingPhotos() {
   const container = document.getElementById('existing-photos')
   container.innerHTML = existingPhotos.map((p, i) => `
     <div class="photo-thumb">
-      <img src="${p.url_photo}" alt="Photo ${i + 1}" />
-      <button type="button" onclick="removeExistingPhoto(${i}, '${p.id}')">×</button>
+      <img src="${esc(p.url_photo)}" alt="Photo ${i + 1}" />
+      <button type="button" data-action="remove-existing" data-i="${i}" data-pid="${esc(p.id)}">×</button>
     </div>`).join('')
-}
 
-window.removeExistingPhoto = (i, photoId) => {
-  photosToDelete.push(photoId)
-  existingPhotos.splice(i, 1)
-  renderExistingPhotos()
+  container.querySelectorAll('[data-action="remove-existing"]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      photosToDelete.push(btn.dataset.pid)
+      existingPhotos.splice(parseInt(btn.dataset.i), 1)
+      renderExistingPhotos()
+    })
+  })
 }
 
 // ── SAVE ─────────────────────────────────────────────────

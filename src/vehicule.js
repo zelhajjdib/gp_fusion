@@ -1,4 +1,5 @@
 import { supabase } from './supabase.js'
+import { esc } from './esc.js'
 
 document.addEventListener('DOMContentLoaded', async () => {
   const params = new URLSearchParams(window.location.search)
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (error || !v) { window.location.href = 'achat.html'; return }
 
   // Increment views (fire and forget)
-  supabase.rpc('increment_vues', { vid: id })
+  supabase.rpc('increment_vues', { vid: id }).then(() => {}, () => {})
 
   // Page title
   document.title = `${v.marque} ${v.modele} ${v.annee} | GP Motors`
@@ -49,11 +50,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('v-price').textContent =
     Number(v.prix).toLocaleString('fr-FR') + ' €'
 
-  // Description
+  // Description (échappée puis newlines remplacés par <br>)
   const descEl = document.getElementById('v-description')
-  if (descEl) descEl.innerHTML = v.description
-    ? v.description.replace(/\n/g, '<br>')
-    : '<span style="color:rgba(255,255,255,0.3)">Aucune description renseignée.</span>'
+  if (descEl) {
+    if (v.description) {
+      descEl.innerHTML = esc(v.description).replace(/\n/g, '<br>')
+    } else {
+      descEl.innerHTML = '<span style="color:rgba(255,255,255,0.3)">Aucune description renseignée.</span>'
+    }
+  }
 
   // Gallery
   const photos = (v.photos || []).slice().sort((a, b) => a.ordre - b.ordre)
@@ -66,8 +71,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   mainImg.alt = `${v.marque} ${v.modele}`
 
   thumbsContainer.innerHTML = photos.map((p, i) =>
-    `<img src="${p.url_photo}" class="thumb${i === 0 ? ' active' : ''}"
-      alt="${v.marque} ${v.modele} photo ${i + 1}" />`
+    `<img src="${esc(p.url_photo)}" class="thumb${i === 0 ? ' active' : ''}"
+      alt="${esc(v.marque)} ${esc(v.modele)} photo ${i + 1}" />`
   ).join('')
 
   const thumbs = Array.from(thumbsContainer.querySelectorAll('.thumb'))

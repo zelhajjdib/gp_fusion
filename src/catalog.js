@@ -1,4 +1,5 @@
 import { supabase } from './supabase.js'
+import { esc } from './esc.js'
 
 const SVG_CAL = `<svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 002 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg>`
 const SVG_KM  = `<svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c0 2 .6 3.9 1.6 5.5l1.7-1.1C4.5 15.1 4 13.6 4 12c0-4.4 3.6-8 8-8s8 3.6 8 8c0 1.6-.5 3.1-1.3 4.4l1.7 1.1C23.4 15.9 24 14 24 12c0-5.5-4.5-10-12-10zm0 13c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm1-2l5-5-1.4-1.4-4.8 4.8 1.2 1.6z"/></svg>`
@@ -11,30 +12,31 @@ function fmtPrice(n) { return Number(n).toLocaleString('fr-FR') + ' €' }
 function renderCard(v) {
   const photos = (v.photos || []).slice().sort((a, b) => a.ordre - b.ordre)
   const img = photos.length > 0 ? photos[0].url_photo : '/vente.jpeg'
+  const id = encodeURIComponent(v.id)
   return `
     <article class="v-card-horizontal"
-      data-brand="${v.marque}" data-model="${v.modele}"
-      data-year="${v.annee}" data-km="${v.kilometrage}"
-      data-energy="${v.energie}" data-price="${v.prix}"
-      data-gearbox="${v.boite}" style="cursor:pointer"
-      onclick="window.location.href='vehicule.html?id=${v.id}'"
+      data-brand="${esc(v.marque)}" data-model="${esc(v.modele)}"
+      data-year="${esc(v.annee)}" data-km="${esc(v.kilometrage)}"
+      data-energy="${esc(v.energie)}" data-price="${esc(v.prix)}"
+      data-gearbox="${esc(v.boite)}" data-href="vehicule.html?id=${id}"
+      style="cursor:pointer"
     >
       <div class="v-card-img-wrap">
-        <img src="${img}" alt="${v.marque} ${v.modele}" class="v-card-img" loading="lazy" />
+        <img src="${esc(img)}" alt="${esc(v.marque)} ${esc(v.modele)}" class="v-card-img" loading="lazy" />
       </div>
       <div class="v-card-body">
-        <h2 class="v-card-title">${v.marque} ${v.modele}</h2>
-        <p class="v-card-subtitle">${v.description || ''}</p>
+        <h2 class="v-card-title">${esc(v.marque)} ${esc(v.modele)}</h2>
+        <p class="v-card-subtitle">${esc(v.description || '')}</p>
         <div class="v-card-specs">
-          <div class="v-spec">${SVG_CAL} ${v.annee}</div>
-          <div class="v-spec">${SVG_KM} ${fmtKm(v.kilometrage)}</div>
-          <div class="v-spec">${SVG_GAS} ${v.energie}</div>
-          <div class="v-spec">${SVG_BOX} ${v.boite}</div>
+          <div class="v-spec">${SVG_CAL} ${esc(v.annee)}</div>
+          <div class="v-spec">${SVG_KM} ${esc(fmtKm(v.kilometrage))}</div>
+          <div class="v-spec">${SVG_GAS} ${esc(v.energie)}</div>
+          <div class="v-spec">${SVG_BOX} ${esc(v.boite)}</div>
         </div>
         <div class="v-card-footer">
-          <div class="v-price">${fmtPrice(v.prix)}</div>
-          <a href="vehicule.html?id=${v.id}" class="v-btn"
-            onclick="event.stopPropagation()"
+          <div class="v-price">${esc(fmtPrice(v.prix))}</div>
+          <a href="vehicule.html?id=${id}" class="v-btn"
+            data-stop-prop="1"
             style="text-decoration:none;text-align:center;display:block;padding:12px;border-radius:6px;font-weight:600;">
             Voir l'annonce
           </a>
@@ -85,7 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (modelSel) {
     const models = [...new Set(vehicles.map(v => v.modele))].sort()
     modelSel.innerHTML = `<option value="Tous">Tous les modèles</option>` +
-      models.map(m => `<option value="${m}">${m}</option>`).join('')
+      models.map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join('')
   }
 
   function render(list) {
@@ -93,6 +95,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       ? list.map(renderCard).join('')
       : `<div style="padding:80px;text-align:center;color:rgba(255,255,255,0.35);">Aucun véhicule ne correspond à vos critères.</div>`
     if (countEl) countEl.textContent = list.length + (list.length > 1 ? ' véhicules disponibles' : ' véhicule disponible')
+
+    listEl.querySelectorAll('.v-card-horizontal').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('[data-stop-prop]')) return
+        const href = card.dataset.href
+        if (href) window.location.href = href
+      })
+    })
   }
 
   function filterAndSort() {
