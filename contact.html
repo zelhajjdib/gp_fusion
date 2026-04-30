@@ -184,6 +184,17 @@
   <script>
     emailjs.init('NFl2F9R0Q-ds-n5wW')
 
+    // Pré-remplir si on vient d'une fiche véhicule (?vehicule=...)
+    const params = new URLSearchParams(window.location.search)
+    const vehiculeParam = params.get('vehicule')
+    if (vehiculeParam) {
+      const form = document.getElementById('contactForm')
+      const objetSel = form.querySelector('select[name="objet"]')
+      const msgEl    = form.querySelector('textarea[name="message"]')
+      if (objetSel) objetSel.value = "Vente d'un véhicule"
+      if (msgEl) msgEl.value = `Bonjour, je suis intéressé(e) par la ${vehiculeParam}. Pouvez-vous me recontacter ?`
+    }
+
     document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault()
       const btn = document.getElementById('contact-submit')

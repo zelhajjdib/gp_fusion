@@ -20,6 +20,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Page title
   document.title = `${v.marque} ${v.modele} ${v.annee} | GP Motors`
 
+  // Lien contact pré-rempli
+  const btnContact = document.getElementById('v-btn-contact')
+  if (btnContact) {
+    const ref = `${v.marque} ${v.modele} ${v.annee}`
+    btnContact.href = `contact.html?vehicule=${encodeURIComponent(ref)}`
+  }
+
   // Header
   document.getElementById('v-badges').textContent =
     `Occasion · ${v.marque}${v.type_vehicule ? ' · ' + v.type_vehicule : ''}`
