@@ -36,8 +36,8 @@
     <div class="nav-overlay-inner">
       <div class="nav-ol-group">
         <img src="/gp_motors_crop.png" class="nav-ol-logo" alt="GP Motors" />
-        <a href="achat.html" class="nav-ol-link">Vente</a>
-        <a href="vente.html" class="nav-ol-link">Reprise</a>
+        <a href="achat.html" class="nav-ol-link">Nos véhicules</a>
+        <a href="vente.html" class="nav-ol-link">Reprise / Dépôt-vente</a>
         <a href="location.html" class="nav-ol-link">Location</a>
         <a href="diagnostic.html" class="nav-ol-link">Diagnostic</a>
       </div>
@@ -128,6 +128,7 @@
               <optgroup label="GP Motors">
                 <option>Vente d'un véhicule</option>
                 <option>Reprise de mon véhicule</option>
+                <option>Dépôt-vente</option>
                 <option>Location</option>
                 <option>Diagnostic</option>
               </optgroup>
@@ -161,8 +162,8 @@
       <div class="footer-col">
         <img src="/gp_motors.png" class="footer-logo-img" alt="GP Motors" />
         <ul class="footer-links">
-          <li><a href="achat.html">Vente Véhicules</a></li>
-          <li><a href="vente.html">Reprise</a></li>
+          <li><a href="achat.html">Nos véhicules</a></li>
+          <li><a href="vente.html">Reprise / Dépôt-vente</a></li>
           <li><a href="location.html">Location</a></li>
           <li><a href="diagnostic.html">Diagnostic</a></li>
         </ul>
@@ -193,6 +194,16 @@
       const msgEl    = form.querySelector('textarea[name="message"]')
       if (objetSel) objetSel.value = "Vente d'un véhicule"
       if (msgEl) msgEl.value = `Bonjour, je suis intéressé(e) par la ${vehiculeParam}. Pouvez-vous me recontacter ?`
+    }
+
+    const objetParam   = params.get('objet')
+    const messageParam = params.get('message')
+    if (objetParam || messageParam) {
+      const form2     = document.getElementById('contactForm')
+      const objetSel2 = form2.querySelector('select[name="objet"]')
+      const msgEl2    = form2.querySelector('textarea[name="message"]')
+      if (objetParam   && objetSel2) objetSel2.value = objetParam
+      if (messageParam && msgEl2)    msgEl2.value    = messageParam
     }
 
     document.getElementById('contactForm').addEventListener('submit', function(e) {

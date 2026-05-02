@@ -221,8 +221,6 @@
   object-fit: cover;
   pointer-events: none;
 }
-/* avant = grayscale sur fond, apres = couleur clippée à droite par JS */
-.sp-ba__avant img { filter: grayscale(1) brightness(0.6); }
 .sp-ba__apres {
   z-index: 2;
   clip-path: inset(0 50% 0 0); /* état initial : montre le côté GAUCHE */
