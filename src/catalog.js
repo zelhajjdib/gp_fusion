@@ -26,7 +26,6 @@ function renderCard(v) {
       </div>
       <div class="v-card-body">
         <h2 class="v-card-title">${esc(v.marque)} ${esc(v.modele)}</h2>
-        <p class="v-card-subtitle">${esc(v.description || '')}</p>
         <div class="v-card-specs">
           <div class="v-spec">${SVG_CAL} ${esc(v.annee)}</div>
           <div class="v-spec">${SVG_KM} ${esc(fmtKm(v.kilometrage))}</div>
@@ -83,12 +82,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const allVehicles = vehicles
 
-  // Populate model filter dynamically
-  if (modelSel) {
-    const models = [...new Set(vehicles.map(v => v.modele))].sort()
+  function updateModelOptions(brand) {
+    if (!modelSel) return
+    const relevant = brand
+      ? allVehicles.filter(v => v.marque.toLowerCase().includes(brand.toLowerCase()))
+      : allVehicles
+    const models = [...new Set(relevant.map(v => v.modele))].sort()
     modelSel.innerHTML = `<option value="Tous">Tous les modèles</option>` +
       models.map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join('')
+    modelSel.value = 'Tous'
   }
+
+  // Populate model filter dynamically
+  updateModelOptions('')
 
   function render(list) {
     listEl.innerHTML = list.length
@@ -148,22 +154,27 @@ document.addEventListener('DOMContentLoaded', async () => {
       const val = e.target.value.toLowerCase()
       brandItems.forEach(li => { li.style.display = li.textContent.toLowerCase().includes(val) ? 'block' : 'none' })
       brandList.classList.add('show')
+      updateModelOptions(e.target.value)
       filterAndSort()
     })
     brandItems.forEach(li => {
       li.addEventListener('click', () => {
-        brandInput.value = li.getAttribute('data-value') || li.textContent
+        const val = li.getAttribute('data-value') || li.textContent
+        brandInput.value = val
         brandList.classList.remove('show')
+        updateModelOptions(val)
         filterAndSort()
       })
     })
   }
 
+  if (modelSel)  modelSel.addEventListener('change', filterAndSort)
   if (btnFilter) btnFilter.addEventListener('click', filterAndSort)
   if (sortSel)   sortSel.addEventListener('change', filterAndSort)
 
   function performReset() {
     if (brandInput)  brandInput.value = ''
+    updateModelOptions('')
     if (modelSel)    modelSel.value   = 'Tous'
     if (priceMin)    priceMin.value   = ''
     if (priceMax)    priceMax.value   = ''
