@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nettoyage | GP Detail</title>
-  <meta name="description" content="Nettoyage vapeur profond, pressing des sièges et décontamination extérieure professionnelle. GP Detail." />
+  <title>Nettoyage Voiture Professionnel Compiègne Oise | GP Detail</title>
+  <meta name="description" content="Nettoyage intérieur et extérieur professionnel à Compiègne et dans l&apos;Oise. Résultat showroom garanti avec GP Detail." />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <link rel="stylesheet" href="/src/style.css" />
   <link rel="stylesheet" href="/src/service-page.css" />
@@ -64,37 +64,6 @@
         <div class="sp-hero__ctas">
           <a href="#formules" class="sp-btn sp-btn--solid">Choisir une formule →</a>
           <a href="#rdv" class="sp-btn sp-btn--outline">Prendre RDV</a>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ===== AVANT / APRÈS ===== -->
-    <section class="sp-ba">
-      <div class="sp-wrap">
-        <div class="sp-section-head">
-          <div class="sp-eyebrow">Résultats</div>
-          <h2 class="sp-h2" style="margin-top:20px;">Avant / <span class="sp-accent">Après</span></h2>
-          <p class="sp-ba__hint">Glissez le curseur pour révéler la transformation.</p>
-        </div>
-      </div>
-      <div class="sp-wrap">
-        <div class="sp-ba__slider" id="baSlider">
-          <!-- Base : avant (grisé) -->
-          <div class="sp-ba__avant">
-            <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=2069" alt="Avant nettoyage" />
-          </div>
-          <!-- Dessus : après (couleur, clippé à droite) -->
-          <div class="sp-ba__apres" id="baApres">
-            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&q=80&w=2070" alt="Après nettoyage" />
-          </div>
-          <!-- Labels au-dessus de tout -->
-          <div class="sp-ba__lbl sp-ba__lbl--avant">Avant</div>
-          <div class="sp-ba__lbl sp-ba__lbl--apres">Après</div>
-          <!-- Handle -->
-          <div class="sp-ba__handle" id="baHandle">
-            <div class="sp-ba__btn">◁ ▷</div>
-          </div>
         </div>
       </div>
     </section>
@@ -343,38 +312,6 @@
     emailjs.init('NFl2F9R0Q-ds-n5wW')
   </script>
   <script>
-    /* ---- Avant/Après slider ---- */
-    (function () {
-      const slider  = document.getElementById('baSlider');
-      const apresEl = document.getElementById('baApres');
-      const handleEl = document.getElementById('baHandle');
-      if (!slider) return;
-      let dragging = false;
-
-      function move(pct) {
-        pct = Math.max(0, Math.min(100, pct));
-        // glisser droite → pct augmente → inset diminue → plus d'APRÈS visible
-        apresEl.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
-        handleEl.style.left = pct + '%';
-      }
-      move(50);
-
-      handleEl.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
-      document.addEventListener('mouseup',   () => dragging = false);
-      document.addEventListener('mousemove', e => {
-        if (!dragging) return;
-        const r = slider.getBoundingClientRect();
-        move((e.clientX - r.left) / r.width * 100);
-      });
-      handleEl.addEventListener('touchstart', e => { dragging = true; }, { passive: true });
-      document.addEventListener('touchend',   () => dragging = false);
-      document.addEventListener('touchmove',  e => {
-        if (!dragging) return;
-        const r = slider.getBoundingClientRect();
-        move((e.touches[0].clientX - r.left) / r.width * 100);
-      }, { passive: true });
-    })();
-
     /* ---- Prix dynamique ---- */
     function updateTotal() {
       const sel = document.querySelector('.sp-tile.is-sel');
