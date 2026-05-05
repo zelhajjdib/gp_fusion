@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "gpmotors0.fr" }],
+      "destination": "https://www.gpmotors0.fr/$1",
+      "permanent": true
+    }
+  ]
+}
